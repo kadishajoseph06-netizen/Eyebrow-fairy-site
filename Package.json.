@@ -1,0 +1,8 @@
+{
+  "name": "eyebrow-fairy-booking",
+  "version": "1.0.0",
+  "dependencies": {
+    "resend": "^3.0.0",
+    "twilio": "^4.0.0"
+  }
+}
