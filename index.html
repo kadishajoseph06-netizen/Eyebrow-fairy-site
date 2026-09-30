@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" class="h-full bg-slate-900">
+<html lang="en" class="h-full bg-slate-950">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -33,23 +33,11 @@
   <header class="sticky top-0 z-40 bg-slate-900/90 backdrop-blur border-b border-pink-900/40 px-4 py-3">
     <div class="max-w-4xl mx-auto flex items-center justify-between">
       <div class="flex items-center gap-3 cursor-pointer" onclick="switchTab('booking')">
-        <div class="w-11 h-11 rounded-full bg-gradient-to-tr from-pink-950 to-slate-900 border border-pink-500/40 p-1 flex items-center justify-center shadow-lg">
-          <!-- Fairy Sitting on Eyebrow Above Eye Logo -->
+        <div class="w-10 h-10 rounded-full bg-pink-950 border border-pink-500/40 p-1 flex items-center justify-center">
           <svg viewBox="0 0 500 500" class="w-full h-full fill-pink-300">
-            <!-- Eyebrow -->
-            <path d="M120,240 C200,190 320,190 380,240 C330,215 210,215 120,240 Z" fill="#f472b6"/>
-            <!-- Eye & Lashes -->
-            <path d="M150,300 C210,350 290,350 350,300 C290,320 210,320 150,300 Z" opacity="0.6"/>
-            <path d="M150,300 C140,285 130,280 120,280 M200,325 C195,310 190,300 185,295 M250,330 C250,315 250,300 250,290 M300,325 C305,310 310,300 315,295 M350,300 C360,285 370,280 380,280" stroke="#f472b6" stroke-width="4" stroke-linecap="round"/>
-            <!-- Fairy Body sitting on eyebrow -->
-            <circle cx="280" cy="170" r="10"/> <!-- Head -->
-            <path d="M280,180 Q275,200 285,215 Q265,215 260,210 Z"/> <!-- Body/Dress -->
-            <!-- Fairy Wings -->
-            <path d="M280,185 C310,160 330,180 290,195 Z" fill="#e879f9" opacity="0.8"/>
-            <path d="M280,190 C305,180 320,200 285,205 Z" fill="#f472b6" opacity="0.7"/>
-            <!-- Wand & Sparkles -->
-            <line x1="285" y1="180" x2="310" y2="165" stroke="#fff" stroke-width="2"/>
-            <polygon points="310,161 313,165 318,165 314,168 316,173 310,170 305,173 307,168 303,165 308,165" fill="#fff"/>
+            <path d="M250,150 C180,150 120,180 80,220 C140,190 200,180 250,180 C300,180 360,190 420,220 C380,180 320,150 250,150 Z"/>
+            <path d="M120,300 C170,350 330,350 380,300 C340,320 280,330 250,330 C220,330 160,320 120,300 Z"/>
+            <circle cx="250" cy="140" r="15"/>
           </svg>
         </div>
         <div>
@@ -59,9 +47,9 @@
       </div>
 
       <nav class="flex items-center gap-2">
-        <button onclick="switchTab('booking')" id="nav-booking" class="px-3.5 py-1.5 rounded-full text-xs font-medium transition bg-pink-600 text-white shadow-md">Book Now</button>
-        <button onclick="switchTab('lookup')" id="nav-lookup" class="px-3.5 py-1.5 rounded-full text-xs font-medium transition text-slate-300 hover:text-white">My Booking</button>
-        <button onclick="switchTab('owner')" id="nav-owner" class="p-2 rounded-full text-xs font-medium text-slate-400 hover:text-pink-300 transition" title="Owner Dashboard"><i class="fa-solid fa-user-shield"></i></button>
+        <button onclick="switchTab('booking')" id="nav-booking" class="px-3 py-1.5 rounded-full text-xs font-medium transition bg-pink-600 text-white">Book Now</button>
+        <button onclick="switchTab('lookup')" id="nav-lookup" class="px-3 py-1.5 rounded-full text-xs font-medium transition text-slate-300 hover:text-white">My Booking</button>
+        <button onclick="switchTab('owner')" id="nav-owner" class="p-2 rounded-full text-xs font-medium text-slate-400 hover:text-pink-300"><i class="fa-solid fa-lock"></i></button>
       </nav>
     </div>
   </header>
@@ -69,79 +57,95 @@
   <!-- MAIN CONTAINER -->
   <main class="max-w-4xl mx-auto w-full px-4 py-6 flex-grow">
 
-    <!-- VIEW 1: CLIENT BOOKING WIZARD -->
+    <!-- VIEW 1: BOOKING WIZARD -->
     <section id="view-booking" class="space-y-6">
       
       <!-- HERO BANNER -->
       <div class="bg-gradient-to-r from-pink-950 via-slate-900 to-purple-950 border border-pink-900/30 rounded-2xl p-6 text-center shadow-xl">
-        <span class="inline-block px-3 py-1 bg-pink-500/10 border border-pink-500/20 text-pink-300 rounded-full text-xs font-semibold mb-3">✨ Book Your Eyebrow Session</span>
+        <span class="inline-block px-3 py-1 bg-pink-500/10 border border-pink-500/20 text-pink-300 rounded-full text-xs font-semibold mb-3">✨ Reserve Your Eyebrow Session</span>
         <h2 class="text-2xl md:text-3xl font-serif-title font-bold text-white mb-2">Enhance Your Natural Beauty</h2>
         <p class="text-xs text-slate-300 max-w-md mx-auto">Evening Appointments Available: 5:00 PM – 7:30 PM</p>
       </div>
 
-      <!-- STEP 1: SERVICE SELECTION -->
-      <div id="step-1" class="space-y-4">
-        <h3 class="text-base font-semibold text-pink-200 flex items-center gap-2"><span class="w-6 h-6 rounded-full bg-pink-900 text-pink-200 text-xs flex items-center justify-center font-bold">1</span> Select Service</h3>
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-4" id="services-container"></div>
+      <!-- ON-PAGE SUCCESS NOTIFICATION (REPLACES WHATSAPP REDIRECT) -->
+      <div id="booking-success-card" class="hidden bg-emerald-950/80 border border-emerald-500/50 rounded-2xl p-6 text-center space-y-3 shadow-2xl animate-fade-in">
+        <div class="w-12 h-12 bg-emerald-900 text-emerald-300 rounded-full flex items-center justify-center mx-auto text-xl"><i class="fa-solid fa-check"></i></div>
+        <h3 class="text-xl font-serif-title font-bold text-white">Booking Confirmed!</h3>
+        <p id="success-card-text" class="text-xs text-emerald-200 max-w-md mx-auto leading-relaxed"></p>
+        <button onclick="resetBookingFlow()" class="mt-2 px-5 py-2 bg-emerald-600 hover:bg-emerald-500 text-white font-medium rounded-lg text-xs transition">Book Another Appointment</button>
       </div>
 
-      <!-- STEP 2: DATE & TIME SELECTION -->
-      <div id="step-2" class="hidden space-y-4">
-        <div class="flex items-center justify-between">
-          <h3 class="text-base font-semibold text-pink-200 flex items-center gap-2"><span class="w-6 h-6 rounded-full bg-pink-900 text-pink-200 text-xs flex items-center justify-center font-bold">2</span> Select Date & Time</h3>
-          <button onclick="goToStep(1)" class="text-xs text-pink-400 hover:underline">← Change Service</button>
+      <!-- BOOKING FORM WIZARD CONTAINER -->
+      <div id="booking-wizard-container">
+        
+        <!-- STEP 1: SERVICE SELECTION -->
+        <div id="step-1" class="space-y-4">
+          <h3 class="text-base font-semibold text-pink-200 flex items-center gap-2"><span class="w-6 h-6 rounded-full bg-pink-900 text-pink-200 text-xs flex items-center justify-center font-bold">1</span> Choose a Service</h3>
+          
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4" id="services-container">
+            <!-- Services injected via JavaScript -->
+          </div>
         </div>
 
-        <div class="bg-slate-900 border border-slate-800 rounded-xl p-4 space-y-4">
-          <div>
-            <label class="block text-xs font-medium text-slate-400 mb-2">Select Date</label>
-            <input type="date" id="booking-date" onchange="renderTimeSlots()" class="w-full bg-slate-950 border border-slate-700 rounded-lg p-3 text-sm text-white focus:outline-none focus:border-pink-500">
+        <!-- STEP 2: DATE & TIME SELECTION -->
+        <div id="step-2" class="hidden space-y-4">
+          <div class="flex items-center justify-between">
+            <h3 class="text-base font-semibold text-pink-200 flex items-center gap-2"><span class="w-6 h-6 rounded-full bg-pink-900 text-pink-200 text-xs flex items-center justify-center font-bold">2</span> Select Date & Time</h3>
+            <button onclick="goToStep(1)" class="text-xs text-pink-400 hover:underline">← Change Service</button>
           </div>
 
-          <div>
-            <label class="block text-xs font-medium text-slate-400 mb-2">Available Evening Slots (5:00 PM – 7:30 PM)</label>
-            <div id="time-slots" class="grid grid-cols-3 sm:grid-cols-5 gap-2">
-              <p class="text-xs text-slate-500 col-span-full">Please pick a date first.</p>
+          <div class="bg-slate-900 border border-slate-800 rounded-xl p-4 space-y-4">
+            <div>
+              <label class="block text-xs font-medium text-slate-400 mb-2">Select Date</label>
+              <input type="date" id="booking-date" onchange="renderTimeSlots()" class="w-full bg-slate-950 border border-slate-700 rounded-lg p-3 text-sm text-white focus:outline-none focus:border-pink-500">
+            </div>
+
+            <div>
+              <label class="block text-xs font-medium text-slate-400 mb-2">Available Evening Slots (5:00 PM – 7:30 PM)</label>
+              <div id="time-slots" class="grid grid-cols-3 sm:grid-cols-4 gap-2">
+                <p class="text-xs text-slate-500 col-span-full">Please pick a date first.</p>
+              </div>
             </div>
           </div>
         </div>
-      </div>
 
-      <!-- STEP 3: CLIENT DETAILS -->
-      <div id="step-3" class="hidden space-y-4">
-        <div class="flex items-center justify-between">
-          <h3 class="text-base font-semibold text-pink-200 flex items-center gap-2"><span class="w-6 h-6 rounded-full bg-pink-900 text-pink-200 text-xs flex items-center justify-center font-bold">3</span> Your Information</h3>
-          <button onclick="goToStep(2)" class="text-xs text-pink-400 hover:underline">← Change Time</button>
+        <!-- STEP 3: CLIENT DETAILS -->
+        <div id="step-3" class="hidden space-y-4">
+          <div class="flex items-center justify-between">
+            <h3 class="text-base font-semibold text-pink-200 flex items-center gap-2"><span class="w-6 h-6 rounded-full bg-pink-900 text-pink-200 text-xs flex items-center justify-center font-bold">3</span> Your Information</h3>
+            <button onclick="goToStep(2)" class="text-xs text-pink-400 hover:underline">← Change Time</button>
+          </div>
+
+          <form id="booking-form" onsubmit="handleFormSubmit(event)" class="bg-slate-900 border border-slate-800 rounded-xl p-5 space-y-4">
+            <div>
+              <label class="block text-xs font-medium text-slate-300 mb-1">Full Name *</label>
+              <input type="text" id="client-name" required placeholder="Jane Doe" class="w-full bg-slate-950 border border-slate-700 rounded-lg p-3 text-sm text-white focus:outline-none focus:border-pink-500">
+            </div>
+
+            <div>
+              <label class="block text-xs font-medium text-slate-300 mb-1">Trinidad Phone Number * (+1 868)</label>
+              <div class="flex">
+                <span class="inline-flex items-center px-3 rounded-l-lg border border-r-0 border-slate-700 bg-slate-800 text-slate-400 text-sm">+1 (868)</span>
+                <input type="tel" id="client-phone" required maxlength="8" placeholder="765-4321" oninput="formatPhone(this)" class="w-full bg-slate-950 border border-slate-700 rounded-r-lg p-3 text-sm text-white focus:outline-none focus:border-pink-500">
+              </div>
+            </div>
+
+            <div>
+              <label class="block text-xs font-medium text-slate-300 mb-1">Email Address <span class="text-slate-500">(Optional)</span></label>
+              <input type="email" id="client-email" placeholder="jane@example.com" class="w-full bg-slate-950 border border-slate-700 rounded-lg p-3 text-sm text-white focus:outline-none focus:border-pink-500">
+            </div>
+
+            <div id="patch-test-checkbox-container" class="hidden bg-pink-950/40 border border-pink-800/40 rounded-lg p-3">
+              <label class="flex items-start gap-2 cursor-pointer">
+                <input type="checkbox" id="patch-test-agree" class="mt-1 accent-pink-500">
+                <span class="text-xs text-pink-200">I acknowledge that <strong>Lamination and Tint</strong> services require a 24-hour patch test prior to appointment time.</span>
+              </label>
+            </div>
+
+            <button type="submit" id="submit-btn" class="w-full py-3.5 bg-gradient-to-r from-pink-600 to-purple-600 hover:from-pink-500 hover:to-purple-500 text-white font-semibold rounded-lg text-sm shadow-lg transition">Confirm & Book Now</button>
+          </form>
         </div>
 
-        <form id="booking-form" onsubmit="handleFormSubmit(event)" class="bg-slate-900 border border-slate-800 rounded-xl p-5 space-y-4">
-          <div>
-            <label class="block text-xs font-medium text-slate-300 mb-1">Full Name *</label>
-            <input type="text" id="client-name" required placeholder="Jane Doe" class="w-full bg-slate-950 border border-slate-700 rounded-lg p-3 text-sm text-white focus:outline-none focus:border-pink-500">
-          </div>
-
-          <div>
-            <label class="block text-xs font-medium text-slate-300 mb-1">Trinidad Phone Number * (+1 868)</label>
-            <div class="flex">
-              <span class="inline-flex items-center px-3 rounded-l-lg border border-r-0 border-slate-700 bg-slate-800 text-slate-400 text-sm">+1 (868)</span>
-              <input type="tel" id="client-phone" required maxlength="8" placeholder="765-4321" oninput="formatPhone(this)" class="w-full bg-slate-950 border border-slate-700 rounded-r-lg p-3 text-sm text-white focus:outline-none focus:border-pink-500">
-            </div>
-          </div>
-
-          <div>
-            <label class="block text-xs font-medium text-slate-300 mb-1">Email Address <span class="text-slate-500">(Optional)</span></label>
-            <input type="email" id="client-email" placeholder="jane@example.com" class="w-full bg-slate-950 border border-slate-700 rounded-lg p-3 text-sm text-white focus:outline-none focus:border-pink-500">
-          </div>
-
-          <div id="patch-test-checkbox-container" class="hidden bg-pink-950/40 border border-pink-800/40 rounded-lg p-3">
-            <label class="flex items-start gap-2 cursor-pointer">
-              <input type="checkbox" id="patch-test-agree" class="mt-1 accent-pink-500">
-              <span class="text-xs text-pink-200">I acknowledge that <strong>Lamination and Tint</strong> services require a 24-hour patch test prior to appointment time.</span>
-            </label>
-          </div>
-
-          <button type="submit" class="w-full py-3.5 bg-gradient-to-r from-pink-600 to-purple-600 hover:from-pink-500 hover:to-purple-500 text-white font-semibold rounded-lg text-sm shadow-lg transition">Confirm & Book Now</button>
-        </form>
       </div>
 
     </section>
@@ -165,121 +169,80 @@
     <section id="view-owner" class="hidden space-y-6">
       
       <!-- LOCK MODAL -->
-      <div id="owner-auth-modal" class="bg-slate-900 border border-slate-800 rounded-2xl p-6 max-w-sm mx-auto text-center space-y-4 shadow-2xl">
-        <div class="w-12 h-12 bg-pink-950 text-pink-400 border border-pink-800/40 rounded-full flex items-center justify-center mx-auto text-xl"><i class="fa-solid fa-lock"></i></div>
+      <div id="owner-auth-modal" class="bg-slate-900 border border-slate-800 rounded-2xl p-6 max-w-sm mx-auto text-center space-y-4">
+        <div class="w-12 h-12 bg-pink-950 text-pink-400 rounded-full flex items-center justify-center mx-auto text-xl"><i class="fa-solid fa-lock"></i></div>
         <h2 class="text-lg font-serif-title font-bold text-white">Owner Portal</h2>
-        <p class="text-xs text-slate-400">Enter PIN to access business schedule & revenue analytics.</p>
+        <p class="text-xs text-slate-400">Enter passcode to access schedule & analytics.</p>
         <input type="password" id="owner-passcode-input" placeholder="Enter PIN (Default: 1234)" class="w-full bg-slate-950 border border-slate-700 rounded-lg p-3 text-sm text-center text-white tracking-widest focus:outline-none focus:border-pink-500">
-        <button onclick="unlockOwnerPortal()" class="w-full py-2.5 bg-pink-600 hover:bg-pink-500 text-white text-sm font-medium rounded-lg shadow-lg">Access Dashboard</button>
+        <button onclick="unlockOwnerPortal()" class="w-full py-2.5 bg-pink-600 hover:bg-pink-500 text-white text-sm font-medium rounded-lg">Access Dashboard</button>
       </div>
 
       <!-- DASHBOARD CONTENT -->
       <div id="owner-dashboard-content" class="hidden space-y-6">
         
-        <!-- DASHBOARD HEADER -->
-        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-800 pb-4">
+        <!-- TOP HEADER & CONTROLS -->
+        <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 border-b border-slate-800 pb-4">
           <div>
-            <h2 class="text-xl font-serif-title font-bold text-white flex items-center gap-2">
-              <span>Studio Management</span>
-              <span class="text-[10px] px-2 py-0.5 bg-pink-950 text-pink-300 border border-pink-800/40 rounded-full font-sans">Owner Mode</span>
-            </h2>
-            <p class="text-xs text-slate-400">Manage client bookings, financial summaries, and data exports.</p>
+            <h2 class="text-xl font-serif-title font-bold text-white">Studio Management & Schedule</h2>
+            <p class="text-xs text-slate-400">Private Owner Analytics</p>
           </div>
-
-          <div class="flex items-center gap-2">
-            <!-- EXPORT SPREADSHEET BUTTON -->
-            <button onclick="exportBookingsToCSV()" class="px-3.5 py-2 bg-emerald-700 hover:bg-emerald-600 text-white text-xs font-semibold rounded-lg shadow flex items-center gap-2 transition">
-              <i class="fa-solid fa-file-excel"></i> Export Spreadsheet
-            </button>
-            <button onclick="changePasscode()" class="px-3 py-2 bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs rounded-lg">PIN</button>
-            <button onclick="lockOwnerPortal()" class="px-3 py-2 bg-rose-950 hover:bg-rose-900 text-rose-300 border border-rose-800/40 text-xs rounded-lg" title="Lock Dashboard"><i class="fa-solid fa-lock"></i></button>
+          <div class="flex items-center gap-2 flex-wrap">
+            <button onclick="exportToCSV()" class="px-3 py-1.5 bg-emerald-900/60 hover:bg-emerald-800 text-emerald-200 border border-emerald-700/50 text-xs rounded-lg flex items-center gap-1.5"><i class="fa-solid fa-file-excel"></i> Export Spreadsheet</button>
+            <button onclick="changePasscode()" class="px-3 py-1.5 bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs rounded-lg">Change PIN</button>
+            <button onclick="lockOwnerPortal()" class="px-3 py-1.5 bg-rose-950 hover:bg-rose-900 text-rose-300 border border-rose-800/40 text-xs rounded-lg"><i class="fa-solid fa-lock mr-1"></i> Lock</button>
           </div>
         </div>
 
-        <!-- ANALYTICS CARDS SECTION -->
+        <!-- ANALYTICS CARDS -->
         <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
-          
-          <!-- Card 1: Total Appointments -->
-          <div class="bg-slate-900 border border-slate-800 p-4 rounded-xl space-y-1">
-            <span class="text-[11px] font-medium text-slate-400 uppercase tracking-wider block">Total Bookings</span>
-            <div class="flex items-baseline justify-between">
-              <span id="stat-total-count" class="text-2xl font-bold text-white">0</span>
-              <i class="fa-solid fa-calendar-check text-pink-400 text-sm"></i>
-            </div>
+          <div class="bg-slate-900 border border-slate-800 rounded-xl p-4">
+            <p class="text-[10px] uppercase font-semibold text-slate-400">Total Bookings</p>
+            <p id="stat-total-count" class="text-2xl font-bold text-white mt-1">0</p>
           </div>
-
-          <!-- Card 2: Expected Revenue -->
-          <div class="bg-slate-900 border border-slate-800 p-4 rounded-xl space-y-1">
-            <span class="text-[11px] font-medium text-slate-400 uppercase tracking-wider block">Expected Revenue</span>
-            <div class="flex items-baseline justify-between">
-              <span id="stat-total-revenue" class="text-2xl font-bold text-emerald-400">$0 TTD</span>
-              <i class="fa-solid fa-sack-dollar text-emerald-400 text-sm"></i>
-            </div>
+          <div class="bg-slate-900 border border-slate-800 rounded-xl p-4">
+            <p class="text-[10px] uppercase font-semibold text-slate-400">Expected Total</p>
+            <p id="stat-total-revenue" class="text-2xl font-bold text-pink-400 mt-1">$0 TTD</p>
           </div>
-
-          <!-- Card 3: Upcoming -->
-          <div class="bg-slate-900 border border-slate-800 p-4 rounded-xl space-y-1">
-            <span class="text-[11px] font-medium text-slate-400 uppercase tracking-wider block">Upcoming</span>
-            <div class="flex items-baseline justify-between">
-              <span id="stat-upcoming-count" class="text-2xl font-bold text-sky-400">0</span>
-              <i class="fa-solid fa-clock text-sky-400 text-sm"></i>
-            </div>
+          <div class="bg-slate-900 border border-slate-800 rounded-xl p-4">
+            <p class="text-[10px] uppercase font-semibold text-slate-400">Active Upcoming</p>
+            <p id="stat-upcoming-count" class="text-2xl font-bold text-emerald-400 mt-1">0</p>
           </div>
-
-          <!-- Card 4: Completed vs Canceled -->
-          <div class="bg-slate-900 border border-slate-800 p-4 rounded-xl space-y-1">
-            <span class="text-[11px] font-medium text-slate-400 uppercase tracking-wider block">Completed / Canceled</span>
-            <div class="flex items-baseline justify-between">
-              <span class="text-lg font-bold text-white">
-                <span id="stat-completed-count" class="text-emerald-400">0</span> / <span id="stat-canceled-count" class="text-rose-400">0</span>
-              </span>
-              <i class="fa-solid fa-chart-pie text-purple-400 text-sm"></i>
-            </div>
+          <div class="bg-slate-900 border border-slate-800 rounded-xl p-4">
+            <p class="text-[10px] uppercase font-semibold text-slate-400">Completed</p>
+            <p id="stat-completed-count" class="text-2xl font-bold text-blue-400 mt-1">0</p>
           </div>
-
         </div>
 
         <!-- BOOKINGS TABLE -->
         <div class="bg-slate-900 border border-slate-800 rounded-xl p-4 overflow-x-auto">
-          <div class="flex items-center justify-between mb-3">
-            <h3 class="text-sm font-semibold text-slate-200">Appointments Schedule</h3>
-            <span class="text-xs text-slate-500">Updated automatically</span>
-          </div>
-
           <table class="w-full text-left text-xs">
             <thead>
               <tr class="border-b border-slate-800 text-pink-300">
-                <th class="p-3">Client</th>
+                <th class="p-3">Client Name</th>
                 <th class="p-3">Phone</th>
                 <th class="p-3">Service</th>
-                <th class="p-3">Est. Price</th>
                 <th class="p-3">Date & Time</th>
+                <th class="p-3">Est. Value</th>
                 <th class="p-3">Status</th>
-                <th class="p-3 text-right">Actions</th>
+                <th class="p-3">Action</th>
               </tr>
             </thead>
-            <tbody id="owner-bookings-table-body" class="divide-y divide-slate-800/60">
+            <tbody id="owner-bookings-table-body">
               <!-- Bookings injected via JavaScript -->
             </tbody>
           </table>
         </div>
-
       </div>
 
     </section>
 
   </main>
 
-  <!-- FOOTER -->
   <footer class="text-center py-4 border-t border-slate-900 text-[11px] text-slate-600">
     © The Eyebrow Fairy • Operating Hours: 5:00 PM – 7:30 PM
   </footer>
 
-  <!-- SCRIPT LOGIC -->
   <script>
-    // ⚠️ REPLACE '18683245307' WITH YOUR ACTUAL TRINIDAD WHATSAPP NUMBER
-    const STUDIO_WHATSAPP_NUMBER = "18683245307"; 
-
     // APP STATE
     let currentStep = 1;
     let selectedService = null;
@@ -287,16 +250,15 @@
     let selectedTime = null;
     let ownerPIN = localStorage.getItem('eyebrow_owner_pin') || '1234';
 
-    // 8 SERVICES WITH DEFAULT INTERNAL ESTIMATED PRICES FOR REVENUE CALCULATION
     const SERVICES = [
-      { id: 1, name: "1. Shape & Wax ~ $60ttd", price: 60, duration: "30 mins", method: "Wax", requiresPatchTest: false, desc: "Precision brow shaping tailored to your facial structure using gentle warm wax." },
-      { id: 2, name: "2. Shape & Shave ~ $60ttd", price: 60, duration: "30 mins", method: "Shave", requiresPatchTest: false, desc: "Precision brow shaping tailored to your facial structure using a smooth soft-blade shaver." },
-      { id: 3, name: "3. Shape, Wax & Tint ~ $115ttd", price: 115, duration: "45 mins", method: "Wax", requiresPatchTest: true, desc: "Brow shaping via warm wax combined with custom-blended tint for enhanced color and definition." },
-      { id: 4, name: "4. Shape, Shave & Tint ~ $115ttd", price: 115, duration: "45 mins", method: "Shave", requiresPatchTest: true, desc: "Brow shaping via soft shaver combined with custom-blended tint for enhanced color and definition." },
-      { id: 5, name: "5. Shape, Wax & Lamination ~ $115ttd", price: 115, duration: "45 mins", method: "Wax", requiresPatchTest: true, desc: "Lamination process to set brows in a full, feathery style with precision warm waxing and shaping." },
-      { id: 6, name: "6. Shape, Shave & Lamination ~ $115ttd", price: 115, duration: "45 mins", method: "Shave", requiresPatchTest: true, desc: "Lamination process to set brows in a full, feathery style with precision soft-blade shaving and shaping." },
-      { id: 7, name: "7. Full Transformation (Wax) ~ $160ttd", price: 160, duration: "1 hour", method: "Wax", requiresPatchTest: true, desc: "Ultimate brow makeover featuring brow shaping ,lamination, custom tint, and precision warm waxing." },
-      { id: 8, name: "8. Full Transformation (Shave) ~ $160ttd", price: 160, duration: "1 hour", method: "Shave", requiresPatchTest: true, desc: "Ultimate brow makeover featuring brow shaping, lamination, custom tint, and precision soft-blade shaving." }
+      { id: 1, name: "1. Shape & Wax ~ $60ttd", price: 60, duration: "30 mins", method: "Wax", requiresPatchTest: false, estimatedPrice: 80, desc: "Precision brow shaping tailored to your facial structure using gentle warm wax." },
+      { id: 2, name: "2. Shape & Shave ~ $60ttd", price: 60, duration: "30 mins", method: "Shave", requiresPatchTest: false, estimatedPrice: 70, desc: "Precision brow shaping tailored to your facial structure using a smooth soft-blade shaver." },
+      { id: 3, name: "3. Shape, Wax & Tint ~ $115ttd", price: 115, duration: "45 mins", method: "Wax", requiresPatchTest: true, estimatedPrice: 130, desc: "Brow shaping via warm wax combined with custom-blended tint for enhanced color and definition." },
+      { id: 4, name: "4. Shape, Shave & Tint ~ $115ttd", price: 115, duration: "45 mins", method: "Shave", requiresPatchTest: true, estimatedPrice: 120, desc: "Brow shaping via soft shaver combined with custom-blended tint for enhanced color and definition." },
+      { id: 5, name: "5. Shape, Wax & Lamination ~ $115ttd", price: 115, duration: "45 mins", method: "Wax", requiresPatchTest: true, estimatedPrice: 180, desc: "Lamination process to set brows in a full, feathery style with precision warm waxing and shaping." },
+      { id: 6, name: "6. Shape, Shave & Lamination~ $115ttd", price: 115, duration: "45 mins", method: "Shave", requiresPatchTest: true, estimatedPrice: 170, desc: "Lamination process to set brows in a full, feathery style with precision soft-blade shaving and shaping." },
+      { id: 7, name: "7. Full Transformation (Wax)~ $160ttd", price: 115, duration: "1 hour", method: "Wax", requiresPatchTest: true, estimatedPrice: 230, desc: "Ultimate brow makeover featuring brow shaping, lamination, custom tint, and precision warm waxing." },
+      { id: 8, name: "8. Full Transformation (Shave)~ $160ttd", price: 115, duration: "1 hour", method: "Shave", requiresPatchTest: true, estimatedPrice: 220, desc: "Ultimate brow makeover featuring brow shaping, lamination, custom tint, and precision soft-blade shaving." }
     ];
 
     function init() {
@@ -351,7 +313,7 @@
       const slots = ["5:00 PM", "5:30 PM", "6:00 PM", "6:30 PM", "7:00 PM"];
       
       container.innerHTML = slots.map(time => `
-        <button type="button" onclick="selectTime('${time}')" class="py-2.5 px-3 rounded-lg text-xs font-medium border text-center transition border-slate-700 bg-slate-950 text-slate-200 hover:border-pink-500 ${selectedTime === time ? 'bg-pink-600 text-white border-pink-600' : ''}">${time}</button>
+        <button type="button" onclick="selectTime('${time}')" class="py-2 px-3 rounded-lg text-xs font-medium border text-center transition border-slate-700 bg-slate-950 text-slate-200 hover:border-pink-500 ${selectedTime === time ? 'bg-pink-600 text-white border-pink-600' : ''}">${time}</button>
       `).join('');
     }
 
@@ -374,23 +336,23 @@
       
       const booking = {
         id: Date.now(),
-        name: document.getElementById('client-name').value.trim(),
-        phone: document.getElementById('client-phone').value.trim(),
-        email: document.getElementById('client-email').value.trim() || 'N/A',
+        name: document.getElementById('client-name').value,
+        phone: document.getElementById('client-phone').value,
+        email: document.getElementById('client-email').value || 'N/A',
         service: selectedService.name,
-        price: selectedService.price,
+        estimatedPrice: selectedService.estimatedPrice,
         date: selectedDate,
         time: selectedTime,
-        status: 'Upcoming', // Default status: Upcoming | Completed | Canceled
+        status: 'Upcoming',
         created: new Date().toISOString()
       };
 
-      // 1. Save locally for Owner Dashboard & Analytics
+      // 1. Save to Local Storage
       const existing = JSON.parse(localStorage.getItem('eyebrow_bookings') || '[]');
       existing.push(booking);
       localStorage.setItem('eyebrow_bookings', JSON.stringify(existing));
 
-      // 2. Trigger Background Automated Email Notification via Resend (Free)
+      // 2. Trigger Background Automated Email via Resend
       try {
         fetch('/.netlify/functions/send-confirmation', {
           method: 'POST',
@@ -401,24 +363,22 @@
         console.log('Background email notification dispatched.');
       }
 
-      // 3. Construct WhatsApp Message text
-      const waText = `✨ *New Booking - The Eyebrow Fairy* ✨%0A%0A` +
-                     `👤 *Client:* ${booking.name}%0A` +
-                     `📞 *Phone:* +1 (868) ${booking.phone}%0A` +
-                     `💅 *Service:* ${booking.service}%0A` +
-                     `📅 *Date:* ${booking.date}%0A` +
-                     `⏰ *Time:* ${booking.time}`;
+      // 3. Display On-Page Confirmation Notification (No popups / no redirects)
+      document.getElementById('booking-wizard-container').classList.add('hidden');
+      document.getElementById('success-card-text').innerHTML = `
+        Thank you, <strong>${booking.name}</strong>! Your appointment for <strong>${booking.service}</strong> on <strong>${booking.date}</strong> at <strong>${booking.time}</strong> is officially scheduled.
+        ${booking.email !== 'N/A' ? '<br><span class="text-[11px] text-emerald-300">A confirmation email has also been sent to ' + booking.email + '.</span>' : ''}
+      `;
+      document.getElementById('booking-success-card').classList.remove('hidden');
+    }
 
-      // 4. Show alert and launch direct WhatsApp dispatch
-      alert(`✨ Booking Confirmed!\n\nThank you ${booking.name}. Tap OK to open WhatsApp and send your confirmation details directly to the studio.`);
-      
-      window.open(`https://wa.me/${STUDIO_WHATSAPP_NUMBER}?text=${waText}`, '_blank');
-
-      // Reset Form State
+    function resetBookingFlow() {
       selectedService = null;
       selectedDate = null;
       selectedTime = null;
       document.getElementById('booking-form').reset();
+      document.getElementById('booking-success-card').classList.add('hidden');
+      document.getElementById('booking-wizard-container').classList.remove('hidden');
       renderServices();
       goToStep(1);
     }
@@ -428,8 +388,8 @@
       document.getElementById('view-lookup').classList.toggle('hidden', tab !== 'lookup');
       document.getElementById('view-owner').classList.toggle('hidden', tab !== 'owner');
 
-      document.getElementById('nav-booking').className = tab === 'booking' ? 'px-3.5 py-1.5 rounded-full text-xs font-medium transition bg-pink-600 text-white shadow-md' : 'px-3.5 py-1.5 rounded-full text-xs font-medium transition text-slate-300 hover:text-white';
-      document.getElementById('nav-lookup').className = tab === 'lookup' ? 'px-3.5 py-1.5 rounded-full text-xs font-medium transition bg-pink-600 text-white shadow-md' : 'px-3.5 py-1.5 rounded-full text-xs font-medium transition text-slate-300 hover:text-white';
+      document.getElementById('nav-booking').className = tab === 'booking' ? 'px-3 py-1.5 rounded-full text-xs font-medium transition bg-pink-600 text-white' : 'px-3 py-1.5 rounded-full text-xs font-medium transition text-slate-300 hover:text-white';
+      document.getElementById('nav-lookup').className = tab === 'lookup' ? 'px-3 py-1.5 rounded-full text-xs font-medium transition bg-pink-600 text-white' : 'px-3 py-1.5 rounded-full text-xs font-medium transition text-slate-300 hover:text-white';
     }
 
     function performLookup() {
@@ -438,7 +398,7 @@
       if (!q) return;
 
       const bookings = JSON.parse(localStorage.getItem('eyebrow_bookings') || '[]');
-      const matches = bookings.filter(b => b.phone.includes(q) || b.email.toLowerCase().includes(q));
+      const matches = bookings.filter(b => b.phone.includes(q) || (b.email && b.email.toLowerCase().includes(q)));
 
       if (matches.length === 0) {
         container.innerHTML = `<p class="text-xs text-rose-400">No booking found for "${q}".</p>`;
@@ -447,17 +407,13 @@
 
       container.innerHTML = matches.map(b => `
         <div class="bg-slate-950 border border-pink-900/40 rounded-xl p-4 text-left space-y-1">
-          <div class="flex justify-between items-center">
-            <h4 class="font-bold text-sm text-pink-300">${b.service}</h4>
-            <span class="text-[10px] px-2 py-0.5 rounded ${b.status === 'Completed' ? 'bg-emerald-950 text-emerald-300 border border-emerald-800' : b.status === 'Canceled' ? 'bg-rose-950 text-rose-300 border border-rose-800' : 'bg-pink-950 text-pink-300 border border-pink-800'}">${b.status || 'Confirmed'}</span>
-          </div>
+          <div class="flex justify-between items-center"><h4 class="font-bold text-sm text-pink-300">${b.service}</h4><span class="text-[10px] bg-pink-950 text-pink-300 px-2 py-0.5 rounded">${b.status || 'Confirmed'}</span></div>
           <p class="text-xs text-slate-300">📅 Date: ${b.date} at ${b.time}</p>
           <p class="text-xs text-slate-400">👤 Client: ${b.name}</p>
         </div>
       `).join('');
     }
 
-    /* OWNER PORTAL & ANALYTICS FUNCTIONS */
     function unlockOwnerPortal() {
       const pin = document.getElementById('owner-passcode-input').value;
       if (pin === ownerPIN) {
@@ -465,7 +421,7 @@
         document.getElementById('owner-dashboard-content').classList.remove('hidden');
         renderOwnerDashboard();
       } else {
-        alert('Incorrect Owner PIN!');
+        alert('Incorrect PIN!');
       }
     }
 
@@ -480,85 +436,61 @@
       if (newPin && newPin.length >= 4) {
         ownerPIN = newPin;
         localStorage.setItem('eyebrow_owner_pin', newPin);
-        alert("PIN updated successfully!");
+        alert("Passcode updated successfully!");
       }
     }
 
     function renderOwnerDashboard() {
       const bookings = JSON.parse(localStorage.getItem('eyebrow_bookings') || '[]');
 
-      // 1. Compute Summary Calculations
+      // Calculate Stats
       const totalCount = bookings.length;
-      let totalRevenue = 0;
-      let upcomingCount = 0;
-      let completedCount = 0;
-      let canceledCount = 0;
+      const totalRevenue = bookings.reduce((sum, b) => sum + (b.estimatedPrice || 0), 0);
+      const upcomingCount = bookings.filter(b => (b.status || 'Upcoming') === 'Upcoming').length;
+      const completedCount = bookings.filter(b => b.status === 'Completed').length;
 
-      bookings.forEach(b => {
-        const p = b.price || 0;
-        const status = b.status || 'Upcoming';
-        
-        if (status !== 'Canceled') {
-          totalRevenue += p;
-        }
-
-        if (status === 'Upcoming') upcomingCount++;
-        else if (status === 'Completed') completedCount++;
-        else if (status === 'Canceled') canceledCount++;
-      });
-
-      // 2. Render Analytics Stat Cards
       document.getElementById('stat-total-count').textContent = totalCount;
       document.getElementById('stat-total-revenue').textContent = `$${totalRevenue} TTD`;
       document.getElementById('stat-upcoming-count').textContent = upcomingCount;
       document.getElementById('stat-completed-count').textContent = completedCount;
-      document.getElementById('stat-canceled-count').textContent = canceledCount;
 
-      // 3. Render Table Body
       const tbody = document.getElementById('owner-bookings-table-body');
       if (bookings.length === 0) {
         tbody.innerHTML = `<tr><td colspan="7" class="p-4 text-center text-slate-500">No appointments scheduled yet.</td></tr>`;
         return;
       }
 
-      tbody.innerHTML = bookings.map(b => {
-        const status = b.status || 'Upcoming';
-        const price = b.price || 0;
-        
-        let statusBadge = `<span class="px-2 py-0.5 rounded text-[10px] bg-sky-950 text-sky-300 border border-sky-800">Upcoming</span>`;
-        if (status === 'Completed') statusBadge = `<span class="px-2 py-0.5 rounded text-[10px] bg-emerald-950 text-emerald-300 border border-emerald-800">Completed</span>`;
-        if (status === 'Canceled') statusBadge = `<span class="px-2 py-0.5 rounded text-[10px] bg-rose-950 text-rose-300 border border-rose-800">Canceled</span>`;
-
-        return `
-          <tr class="hover:bg-slate-800/40 transition">
-            <td class="p-3 font-medium text-white">${b.name}</td>
-            <td class="p-3 text-slate-300">+1 (868) ${b.phone}</td>
-            <td class="p-3 text-pink-300">${b.service}</td>
-            <td class="p-3 text-emerald-400 font-semibold">$${price} TTD</td>
-            <td class="p-3 text-slate-300">${b.date} @ ${b.time}</td>
-            <td class="p-3">${statusBadge}</td>
-            <td class="p-3 text-right space-x-1">
-              ${status === 'Upcoming' ? `<button onclick="updateBookingStatus(${b.id}, 'Completed')" class="text-emerald-400 hover:underline text-[11px]" title="Mark Completed">Done</button> •` : ''}
-              ${status !== 'Canceled' ? `<button onclick="updateBookingStatus(${b.id}, 'Canceled')" class="text-amber-400 hover:underline text-[11px]" title="Cancel">Cancel</button> •` : ''}
-              <button onclick="deleteBooking(${b.id})" class="text-rose-400 hover:underline text-[11px]" title="Delete Record">Delete</button>
-            </td>
-          </tr>
-        `;
-      }).join('');
+      tbody.innerHTML = bookings.map(b => `
+        <tr class="border-b border-slate-800 hover:bg-slate-800/50">
+          <td class="p-3 font-medium text-white">${b.name}</td>
+          <td class="p-3 text-slate-300">+1 (868) ${b.phone}</td>
+          <td class="p-3 text-pink-300">${b.service}</td>
+          <td class="p-3 text-slate-300">${b.date} @ ${b.time}</td>
+          <td class="p-3 text-emerald-400 font-semibold">$${b.estimatedPrice || 0} TTD</td>
+          <td class="p-3">
+            <select onchange="updateBookingStatus(${b.id}, this.value)" class="bg-slate-950 border border-slate-700 rounded px-2 py-1 text-[11px] text-slate-200 focus:outline-none">
+              <option value="Upcoming" ${(!b.status || b.status === 'Upcoming') ? 'selected' : ''}>Upcoming</option>
+              <option value="Completed" ${b.status === 'Completed' ? 'selected' : ''}>Completed</option>
+              <option value="Canceled" ${b.status === 'Canceled' ? 'selected' : ''}>Canceled</option>
+            </select>
+          </td>
+          <td class="p-3"><button onclick="deleteBooking(${b.id})" class="text-rose-400 hover:underline">Delete</button></td>
+        </tr>
+      `).join('');
     }
 
     function updateBookingStatus(id, newStatus) {
       let bookings = JSON.parse(localStorage.getItem('eyebrow_bookings') || '[]');
-      const index = bookings.findIndex(b => b.id === id);
-      if (index !== -1) {
-        bookings[index].status = newStatus;
+      const b = bookings.find(item => item.id === id);
+      if (b) {
+        b.status = newStatus;
         localStorage.setItem('eyebrow_bookings', JSON.stringify(bookings));
         renderOwnerDashboard();
       }
     }
 
     function deleteBooking(id) {
-      if (confirm('Permanently delete this booking record?')) {
+      if (confirm('Delete this appointment entry?')) {
         let bookings = JSON.parse(localStorage.getItem('eyebrow_bookings') || '[]');
         bookings = bookings.filter(b => b.id !== id);
         localStorage.setItem('eyebrow_bookings', JSON.stringify(bookings));
@@ -566,49 +498,42 @@
       }
     }
 
-    /* EXPORT SPREADSHEET ENGINE (CSV) */
-    function exportBookingsToCSV() {
+    function exportToCSV() {
       const bookings = JSON.parse(localStorage.getItem('eyebrow_bookings') || '[]');
-
       if (bookings.length === 0) {
         alert('No bookings available to export.');
         return;
       }
 
-      // 1. Build CSV Headers
-      const headers = ["Client Name", "Phone (+1 868)", "Email", "Service Name", "Price (TTD)", "Date", "Time", "Status", "Booking Created"];
-      
-      // 2. Build CSV Rows
-      const rows = bookings.map(b => [
-        `"${b.name.replace(/"/g, '""')}"`,
-        `"+1 (868) ${b.phone}"`,
-        `"${b.email.replace(/"/g, '""')}"`,
-        `"${b.service.replace(/"/g, '""')}"`,
-        `"$${b.price || 0}"`,
-        `"${b.date}"`,
-        `"${b.time}"`,
-        `"${b.status || 'Upcoming'}"`,
-        `"${b.created || ''}"`
-      ]);
+      let csvContent = "data:text/csv;charset=utf-8,ID,Client Name,Trinidad Phone,Email,Service,Date,Time,Est Price (TTD),Status,Created Date\n";
 
-      const csvContent = [headers.join(','), ...rows.map(r => r.join(','))].join('\n');
+      bookings.forEach(b => {
+        const row = [
+          b.id,
+          `"${b.name}"`,
+          `"+1 (868) ${b.phone}"`,
+          `"${b.email || 'N/A'}"`,
+          `"${b.service}"`,
+          `"${b.date}"`,
+          `"${b.time}"`,
+          `"${b.estimatedPrice || 0}"`,
+          `"${b.status || 'Upcoming'}"`,
+          `"${b.created}"`
+        ].join(",");
+        csvContent += row + "\n";
+      });
 
-      // 3. Create Download File Blob
-      const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
-      const url = URL.createObjectURL(blob);
+      const encodedUri = encodeURI(csvContent);
       const link = document.createElement("a");
-      link.setAttribute("href", url);
-      link.setAttribute("download", `Eyebrow_Fairy_Bookings_${new Date().toISOString().split('T')[0]}.csv`);
+      link.setAttribute("href", encodedUri);
+      link.setAttribute("download", `Eyebrow_Fairy_Schedule_${new Date().toISOString().split('T')[0]}.csv`);
       document.body.appendChild(link);
       link.click();
       document.body.removeChild(link);
     }
 
-    // Initialize Application on Window Load
-    window.onload = function() {
-      init();
-    };
+    // Initialize
+    init();
   </script>
 </body>
 </html>
-```
