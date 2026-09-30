@@ -1,0 +1,101 @@
+html
+<!DOCTYPE html>
+<html lang="en" class="h-full bg-rose-50/40">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Eyebrow Fairy - Precision Brow Studio</title>
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        fairy: {
+                            50: '#fdf2f8',
+                            100: '#fce7f3',
+                            200: '#fbcfe8',
+                            300: '#f472b6',
+                            400: '#e879f9',
+                            500: '#d946ef',
+                            600: '#c026d3',
+                            700: '#a21caf',
+                            800: '#86198f',
+                            900: '#701a75',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        serif: ['Playfair Display', 'serif']
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,600;0,700;1,400&display=swap" rel="stylesheet">
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    
+    <style>
+        .fairy-glass {
+            background: rgba(255, 255, 255, 0.92);
+            backdrop-filter: blur(12px);
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 6px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background-color: #fbcfe8;
+            border-radius: 9999px;
+        }
+        @keyframes floatGlow {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-3px); }
+        }
+        .animate-float {
+            animation: floatGlow 3s ease-in-out infinite;
+        }
+    </style>
+</head>
+<body class="h-full text-stone-800 antialiased font-sans flex flex-col min-h-screen">
+
+    <header class="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-rose-100 shadow-sm">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 py-3 flex items-center justify-between">
+            <!-- Brand Logo & Title -->
+            <div class="flex items-center gap-3 cursor-pointer" onclick="switchTab('booking')">
+                <div class="w-12 h-12 rounded-full bg-rose-50 border border-rose-200 flex items-center justify-center overflow-hidden shadow-sm p-1 shrink-0 animate-float">
+                    <!-- SVG Recreation of uploaded image: Fairy sitting on eyebrow arch above closed eye -->
+                    <svg viewBox="0 0 200 200" class="w-full h-full text-stone-900" fill="currentColor">
+                        <!-- Closed Eye Lash Line -->
+                        <path d="M 40 142 Q 100 180 160 142" stroke="currentColor" stroke-width="7" fill="none" stroke-linecap="round"/>
+                        <!-- Eyelashes -->
+                        <path d="M 45 145 L 35 158 M 65 156 L 58 171 M 88 162 L 85 178 M 112 162 L 115 178 M 135 156 L 142 171 M 155 145 L 165 158" stroke="currentColor" stroke-width="5" stroke-linecap="round"/>
+                        <!-- Eyebrow Arch -->
+                        <path d="M 22 92 Q 88 38 178 82 Q 112 52 22 92 Z" fill="currentColor" />
+                        <!-- Sitting Fairy Figure -->
+                        <circle cx="102" cy="32" r="9" />
+                        <!-- Bun -->
+                        <circle cx="110" cy="26" r="4" />
+                        <!-- Torso -->
+                        <path d="M 102 41 Q 95 62 90 76 L 104 76 Q 99 62 102 41 Z" />
+                        <!-- Legs sitting on brow -->
+                        <path d="M 90 76 Q 86 92 82 102 M 90 76 Q 96 92 93 105" stroke="currentColor" stroke-width="4" fill="none" stroke-linecap="round"/>
+                        <!-- Upper and Lower Wings -->
+                        <path d="M 102 46 Q 134 22 136 50 Q 116 60 102 54 Z" fill="currentColor" opacity="0.85" />
+                        <path d="M 102 54 Q 130 55 128 74 Q 112 74 102 59 Z" fill="currentColor" opacity="0.85" />
+                    </svg>
+                </div>
+                <div>
+                    <h1 class="font-serif font-bold text-lg sm:text-xl text-stone-900 tracking-tight leading-tight">The Eyebrow Fairy</h1>
+                    <p class="text-[10px] sm:text-[11px] text-fairy-600 font-semibold tracking-wider uppercase">Precision Brow Studio</p>
+                </div>
+            </div>
+
+            <!-- Navigation Actions -->
+            <nav class="flex items-center gap-2 sm:gap-3">
+                <button onclick="switchTab('booking')" id="nav-
