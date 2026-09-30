@@ -212,14 +212,14 @@
     let ownerPIN = localStorage.getItem('eyebrow_owner_pin') || '1234';
 
     const SERVICES = [
-      { id: 1, name: "1. Shape & Wax $60 tt", duration: "30 mins", method: "Wax", requiresPatchTest: false, desc: "Precision brow shaping tailored to your facial structure using gentle warm wax." },
-      { id: 2, name: "2. Shape & Shave $60 tt", duration: "30 mins", method: "Shave", requiresPatchTest: false, desc: "Precision brow shaping tailored to your facial structure using a smooth soft-blade shaver." },
-      { id: 3, name: "3. Shape, Wax & Tint $115 tt", duration: "45 mins", method: "Wax", requiresPatchTest: true, desc: "Brow shaping via warm wax combined with custom-blended tint for enhanced color and definition." },
-      { id: 4, name: "4. Shape, Shave & Tint $115 tt", duration: "45 mins", method: "Shave", requiresPatchTest: true, desc: "Brow shaping via soft shaver combined with custom-blended tint for enhanced color and definition." },
-      { id: 5, name: "5. Shape, Wax & Lamination $115 tt", duration: "45 mins", method: "Wax", requiresPatchTest: true, desc: "Lamination process to set brows in a full, feathery style with precision warm waxing and shaping." },
-      { id: 6, name: "6. Shape, Shave & Lamination $115 tt", duration: "45 mins", method: "Shave", requiresPatchTest: true, desc: "Lamination process to set brows in a full, feathery style with precision soft-blade shaving and shaping." },
-      { id: 7, name: "7. Full Transformation (Wax) $160 tt", duration: "1 hour", method: "Wax", requiresPatchTest: true, desc: "Ultimate brow makeover featuring brow shaping, lamination, custom tint, and precision warm waxing." },
-      { id: 8, name: "8. Full Transformation (Shave) $160 tt", duration: "1 hour", method: "Shave", requiresPatchTest: true, desc: "Ultimate brow makeover featuring brow shaping, lamination, custom tint, and precision soft-blade shaving." }
+      { id: 1, name: "1. Shape & Wax - $60 tt", duration: "30 mins", method: "Wax", requiresPatchTest: false, desc: "Precision brow shaping tailored to your facial structure using gentle warm wax." },
+      { id: 2, name: "2. Shape & Shave - $60 tt", duration: "30 mins", method: "Shave", requiresPatchTest: false, desc: "Precision brow shaping tailored to your facial structure using a smooth soft-blade shaver." },
+      { id: 3, name: "3. Shape, Wax & Tint - $115 tt", duration: "45 mins", method: "Wax", requiresPatchTest: true, desc: "Brow shaping via warm wax combined with custom-blended tint for enhanced color and definition." },
+      { id: 4, name: "4. Shape, Shave & Tint - $115 tt", duration: "45 mins", method: "Shave", requiresPatchTest: true, desc: "Brow shaping via soft shaver combined with custom-blended tint for enhanced color and definition." },
+      { id: 5, name: "5. Shape, Wax & Lamination - $115 tt", duration: "45 mins", method: "Wax", requiresPatchTest: true, desc: "Lamination process to set brows in a full, feathery style with precision warm waxing and shaping." },
+      { id: 6, name: "6. Shape, Shave & Lamination - $115 tt", duration: "45 mins", method: "Shave", requiresPatchTest: true, desc: "Lamination process to set brows in a full, feathery style with precision soft-blade shaving and shaping." },
+      { id: 7, name: "7. Full Transformation (Wax) - $160 tt", duration: "1 hour", method: "Wax", requiresPatchTest: true, desc: "Ultimate brow makeover featuring brow shaping, lamination, custom tint, and precision warm waxing." },
+      { id: 8, name: "8. Full Transformation (Shave) - $160 tt", duration: "1 hour", method: "Shave", requiresPatchTest: true, desc: "Ultimate brow makeover featuring brow shaping, lamination, custom tint, and precision soft-blade shaving." }
     ];
 
     function init() {
