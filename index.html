@@ -293,8 +293,61 @@
       input.value = val;
     }
 
-    async function handleFormSubmit(e) {
-      e.preventDefault();
+    // ⚠️ REPLACE '7654321' WITH YOUR ACTUAL 7-DIGIT TRINIDAD WHATSAPP PHONE NUMBER
+const STUDIO_WHATSAPP_NUMBER = "18687654321"; 
+
+async function handleFormSubmit(e) {
+  e.preventDefault();
+  
+  const booking = {
+    id: Date.now(),
+    name: document.getElementById('client-name').value,
+    phone: document.getElementById('client-phone').value,
+    email: document.getElementById('client-email').value || 'N/A',
+    service: selectedService.name,
+    date: selectedDate,
+    time: selectedTime,
+    created: new Date().toISOString()
+  };
+
+  // 1. Save booking to local storage for the Owner Portal
+  const existing = JSON.parse(localStorage.getItem('eyebrow_bookings') || '[]');
+  existing.push(booking);
+  localStorage.setItem('eyebrow_bookings', JSON.stringify(existing));
+
+  // 2. Trigger background automated email via Resend (Free)
+  try {
+    fetch('/.netlify/functions/send-confirmation', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(booking)
+    });
+  } catch(err) {
+    console.log('Background email trigger dispatched.');
+  }
+
+  // 3. Format WhatsApp confirmation message
+  const waText = `✨ *New Booking - The Eyebrow Fairy* ✨%0A%0A` +
+                 `👤 *Client:* ${booking.name}%0A` +
+                 `📞 *Phone:* +1 (868) ${booking.phone}%0A` +
+                 `💅 *Service:* ${booking.service}%0A` +
+                 `📅 *Date:* ${booking.date}%0A` +
+                 `⏰ *Time:* ${booking.time}`;
+
+  // 4. Show confirmation alert & open WhatsApp automatically
+  alert(`✨ Booking Confirmed!\n\nThank you ${booking.name}. Tap OK to open WhatsApp and send your appointment confirmation to the studio.`);
+  
+  window.open(`https://wa.me/${STUDIO_WHATSAPP_NUMBER}?text=${waText}`, '_blank');
+
+  // 5. Reset form and return to step 1
+  selectedService = null;
+  selectedDate = null;
+  selectedTime = null;
+  document.getElementById('booking-form').reset();
+  renderServices();
+  goToStep(1);
+}
+
       
       const booking = {
         id: Date.now(),
