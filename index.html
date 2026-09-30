@@ -1,100 +1,427 @@
 <!DOCTYPE html>
-<html lang="en" class="h-full bg-rose-50/40">
+<html lang="en" class="h-full bg-slate-900">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>The Eyebrow Fairy - Precision Brow Studio</title>
-
-    <!-- Tailwind CSS CDN -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        fairy: {
-                            50: '#fdf2f8',
-                            100: '#fce7f3',
-                            200: '#fbcfe8',
-                            300: '#f472b6',
-                            400: '#e879f9',
-                            500: '#d946ef',
-                            600: '#c026d3',
-                            700: '#a21caf',
-                            800: '#86198f',
-                            900: '#701a75',
-                        }
-                    },
-                    fontFamily: {
-                        sans: ['Inter', 'sans-serif'],
-                        serif: ['Playfair Display', 'serif']
-                    }
-                }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Eyebrow Fairy - Precision Brow Studio</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            fairy: {
+              50: '#fdf2f8', 100: '#fce7f3', 200: '#fbcfe8', 300: '#f472b6',
+              400: '#e879f9', 500: '#d946ef', 600: '#c026d3', 700: '#a21caf',
+              800: '#86198f', 900: '#701a75'
             }
+          }
         }
-    </script>
-    <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,600;0,700;1,400&display=swap" rel="stylesheet">
-    <!-- Lucide Icons -->
-    <script src="https://unpkg.com/lucide@latest"></script>
-    
-    <style>
-        .fairy-glass {
-            background: rgba(255, 255, 255, 0.92);
-            backdrop-filter: blur(12px);
-        }
-        .custom-scrollbar::-webkit-scrollbar {
-            width: 6px;
-        }
-        .custom-scrollbar::-webkit-scrollbar-thumb {
-            background-color: #fbcfe8;
-            border-radius: 9999px;
-        }
-        @keyframes floatGlow {
-            0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(-3px); }
-        }
-        .animate-float {
-            animation: floatGlow 3s ease-in-out infinite;
-        }
-    </style>
+      }
+    }
+  </script>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap');
+    body { font-family: 'Plus Jakarta Sans', sans-serif; }
+    .font-serif-title { font-family: 'Playfair Display', serif; }
+  </style>
 </head>
-<body class="h-full text-stone-800 antialiased font-sans flex flex-col min-h-screen">
+<body class="min-h-full bg-slate-950 text-slate-100 flex flex-col justify-between">
 
-    <header class="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-rose-100 shadow-sm">
-        <div class="max-w-6xl mx-auto px-4 sm:px-6 py-3 flex items-center justify-between">
-            <!-- Brand Logo & Title -->
-            <div class="flex items-center gap-3 cursor-pointer" onclick="switchTab('booking')">
-                <div class="w-12 h-12 rounded-full bg-rose-50 border border-rose-200 flex items-center justify-center overflow-hidden shadow-sm p-1 shrink-0 animate-float">
-                    <!-- SVG Recreation of uploaded image: Fairy sitting on eyebrow arch above closed eye -->
-                    <svg viewBox="0 0 200 200" class="w-full h-full text-stone-900" fill="currentColor">
-                        <!-- Closed Eye Lash Line -->
-                        <path d="M 40 142 Q 100 180 160 142" stroke="currentColor" stroke-width="7" fill="none" stroke-linecap="round"/>
-                        <!-- Eyelashes -->
-                        <path d="M 45 145 L 35 158 M 65 156 L 58 171 M 88 162 L 85 178 M 112 162 L 115 178 M 135 156 L 142 171 M 155 145 L 165 158" stroke="currentColor" stroke-width="5" stroke-linecap="round"/>
-                        <!-- Eyebrow Arch -->
-                        <path d="M 22 92 Q 88 38 178 82 Q 112 52 22 92 Z" fill="currentColor" />
-                        <!-- Sitting Fairy Figure -->
-                        <circle cx="102" cy="32" r="9" />
-                        <!-- Bun -->
-                        <circle cx="110" cy="26" r="4" />
-                        <!-- Torso -->
-                        <path d="M 102 41 Q 95 62 90 76 L 104 76 Q 99 62 102 41 Z" />
-                        <!-- Legs sitting on brow -->
-                        <path d="M 90 76 Q 86 92 82 102 M 90 76 Q 96 92 93 105" stroke="currentColor" stroke-width="4" fill="none" stroke-linecap="round"/>
-                        <!-- Upper and Lower Wings -->
-                        <path d="M 102 46 Q 134 22 136 50 Q 116 60 102 54 Z" fill="currentColor" opacity="0.85" />
-                        <path d="M 102 54 Q 130 55 128 74 Q 112 74 102 59 Z" fill="currentColor" opacity="0.85" />
-                    </svg>
-                </div>
-                <div>
-                    <h1 class="font-serif font-bold text-lg sm:text-xl text-stone-900 tracking-tight leading-tight">The Eyebrow Fairy</h1>
-                    <p class="text-[10px] sm:text-[11px] text-fairy-600 font-semibold tracking-wider uppercase">Precision Brow Studio</p>
-                </div>
+  <!-- NAVIGATION HEADER -->
+  <header class="sticky top-0 z-40 bg-slate-900/90 backdrop-blur border-b border-pink-900/40 px-4 py-3">
+    <div class="max-w-4xl mx-auto flex items-center justify-between">
+      <div class="flex items-center gap-3 cursor-pointer" onclick="switchTab('booking')">
+        <div class="w-10 h-10 rounded-full bg-pink-950 border border-pink-500/40 p-1 flex items-center justify-center">
+          <svg viewBox="0 0 500 500" class="w-full h-full fill-pink-300">
+            <path d="M250,150 C180,150 120,180 80,220 C140,190 200,180 250,180 C300,180 360,190 420,220 C380,180 320,150 250,150 Z"/>
+            <path d="M120,300 C170,350 330,350 380,300 C340,320 280,330 250,330 C220,330 160,320 120,300 Z"/>
+            <circle cx="250" cy="140" r="15"/>
+          </svg>
+        </div>
+        <div>
+          <h1 class="font-serif-title text-lg font-bold text-pink-200 leading-tight">The Eyebrow Fairy</h1>
+          <p class="text-[10px] tracking-widest uppercase text-pink-400 font-semibold">Precision Brow Studio</p>
+        </div>
+      </div>
+
+      <nav class="flex items-center gap-2">
+        <button onclick="switchTab('booking')" id="nav-booking" class="px-3 py-1.5 rounded-full text-xs font-medium transition bg-pink-600 text-white">Book Now</button>
+        <button onclick="switchTab('lookup')" id="nav-lookup" class="px-3 py-1.5 rounded-full text-xs font-medium transition text-slate-300 hover:text-white">My Booking</button>
+        <button onclick="switchTab('owner')" id="nav-owner" class="p-2 rounded-full text-xs font-medium text-slate-400 hover:text-pink-300"><i class="fa-solid fa-lock"></i></button>
+      </nav>
+    </div>
+  </header>
+
+  <!-- MAIN CONTAINER -->
+  <main class="max-w-4xl mx-auto w-full px-4 py-6 flex-grow">
+
+    <!-- VIEW 1: BOOKING WIZARD -->
+    <section id="view-booking" class="space-y-6">
+      
+      <!-- HERO BANNER -->
+      <div class="bg-gradient-to-r from-pink-950 via-slate-900 to-purple-950 border border-pink-900/30 rounded-2xl p-6 text-center shadow-xl">
+        <span class="inline-block px-3 py-1 bg-pink-500/10 border border-pink-500/20 text-pink-300 rounded-full text-xs font-semibold mb-3">✨ Book Your Eyebrow Session</span>
+        <h2 class="text-2xl md:text-3xl font-serif-title font-bold text-white mb-2">Enhance Your Natural Beauty</h2>
+        <p class="text-xs text-slate-300 max-w-md mx-auto">Evening Appointments Available: 5:00 PM – 7:30 PM</p>
+      </div>
+
+      <!-- STEP 1: SERVICE SELECTION -->
+      <div id="step-1" class="space-y-4">
+        <h3 class="text-base font-semibold text-pink-200 flex items-center gap-2"><span class="w-6 h-6 rounded-full bg-pink-900 text-pink-200 text-xs flex items-center justify-center font-bold">1</span> Choose a Service</h3>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4" id="services-container">
+          <!-- Services injected via JavaScript -->
+        </div>
+      </div>
+
+      <!-- STEP 2: DATE & TIME SELECTION -->
+      <div id="step-2" class="hidden space-y-4">
+        <div class="flex items-center justify-between">
+          <h3 class="text-base font-semibold text-pink-200 flex items-center gap-2"><span class="w-6 h-6 rounded-full bg-pink-900 text-pink-200 text-xs flex items-center justify-center font-bold">2</span> Select Date & Time</h3>
+          <button onclick="goToStep(1)" class="text-xs text-pink-400 hover:underline">← Change Service</button>
+        </div>
+
+        <div class="bg-slate-900 border border-slate-800 rounded-xl p-4 space-y-4">
+          <div>
+            <label class="block text-xs font-medium text-slate-400 mb-2">Select Date</label>
+            <input type="date" id="booking-date" onchange="renderTimeSlots()" class="w-full bg-slate-950 border border-slate-700 rounded-lg p-3 text-sm text-white focus:outline-none focus:border-pink-500">
+          </div>
+
+          <div>
+            <label class="block text-xs font-medium text-slate-400 mb-2">Available Evening Slots (5:00 PM – 7:30 PM)</label>
+            <div id="time-slots" class="grid grid-cols-3 sm:grid-cols-4 gap-2">
+              <p class="text-xs text-slate-500 col-span-full">Please pick a date first.</p>
             </div>
+          </div>
+        </div>
+      </div>
 
-            <!-- Navigation Actions -->
-            <nav class="flex items-center gap-2 sm:gap-3">
-                <button onclick="switchTab('booking')" id="nav-
+      <!-- STEP 3: CLIENT DETAILS -->
+      <div id="step-3" class="hidden space-y-4">
+        <div class="flex items-center justify-between">
+          <h3 class="text-base font-semibold text-pink-200 flex items-center gap-2"><span class="w-6 h-6 rounded-full bg-pink-900 text-pink-200 text-xs flex items-center justify-center font-bold">3</span> Your Information</h3>
+          <button onclick="goToStep(2)" class="text-xs text-pink-400 hover:underline">← Change Time</button>
+        </div>
+
+        <form id="booking-form" onsubmit="handleFormSubmit(event)" class="bg-slate-900 border border-slate-800 rounded-xl p-5 space-y-4">
+          <div>
+            <label class="block text-xs font-medium text-slate-300 mb-1">Full Name *</label>
+            <input type="text" id="client-name" required placeholder="Jane Doe" class="w-full bg-slate-950 border border-slate-700 rounded-lg p-3 text-sm text-white focus:outline-none focus:border-pink-500">
+          </div>
+
+          <div>
+            <label class="block text-xs font-medium text-slate-300 mb-1">Trinidad Phone Number * (+1 868)</label>
+            <div class="flex">
+              <span class="inline-flex items-center px-3 rounded-l-lg border border-r-0 border-slate-700 bg-slate-800 text-slate-400 text-sm">+1 (868)</span>
+              <input type="tel" id="client-phone" required maxlength="8" placeholder="765-4321" oninput="formatPhone(this)" class="w-full bg-slate-950 border border-slate-700 rounded-r-lg p-3 text-sm text-white focus:outline-none focus:border-pink-500">
+            </div>
+          </div>
+
+          <div>
+            <label class="block text-xs font-medium text-slate-300 mb-1">Email Address <span class="text-slate-500">(Optional)</span></label>
+            <input type="email" id="client-email" placeholder="jane@example.com" class="w-full bg-slate-950 border border-slate-700 rounded-lg p-3 text-sm text-white focus:outline-none focus:border-pink-500">
+          </div>
+
+          <div id="patch-test-checkbox-container" class="hidden bg-pink-950/40 border border-pink-800/40 rounded-lg p-3">
+            <label class="flex items-start gap-2 cursor-pointer">
+              <input type="checkbox" id="patch-test-agree" class="mt-1 accent-pink-500">
+              <span class="text-xs text-pink-200">I acknowledge that <strong>Lamination and Tint</strong> services require a 24-hour patch test prior to appointment time.</span>
+            </label>
+          </div>
+
+          <button type="submit" class="w-full py-3.5 bg-gradient-to-r from-pink-600 to-purple-600 hover:from-pink-500 hover:to-purple-500 text-white font-semibold rounded-lg text-sm shadow-lg transition">Confirm & Book Now</button>
+        </form>
+      </div>
+
+    </section>
+
+    <!-- VIEW 2: CLIENT LOOKUP -->
+    <section id="view-lookup" class="hidden space-y-6">
+      <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6 text-center max-w-md mx-auto space-y-4">
+        <h2 class="text-xl font-serif-title font-bold text-white">Lookup Your Booking</h2>
+        <p class="text-xs text-slate-400">Enter your 7-digit Trinidad phone number or email to view your upcoming appointment.</p>
+        
+        <div class="space-y-3">
+          <input type="text" id="lookup-query" placeholder="Phone (e.g. 7654321) or Email" class="w-full bg-slate-950 border border-slate-700 rounded-lg p-3 text-sm text-white focus:outline-none focus:border-pink-500">
+          <button onclick="performLookup()" class="w-full py-3 bg-pink-600 hover:bg-pink-500 text-white font-medium rounded-lg text-sm">Find Appointment</button>
+        </div>
+
+        <div id="lookup-results" class="pt-4 space-y-3"></div>
+      </div>
+    </section>
+
+    <!-- VIEW 3: OWNER DASHBOARD -->
+    <section id="view-owner" class="hidden space-y-6">
+      
+      <!-- LOCK MODAL -->
+      <div id="owner-auth-modal" class="bg-slate-900 border border-slate-800 rounded-2xl p-6 max-w-sm mx-auto text-center space-y-4">
+        <div class="w-12 h-12 bg-pink-950 text-pink-400 rounded-full flex items-center justify-center mx-auto text-xl"><i class="fa-solid fa-lock"></i></div>
+        <h2 class="text-lg font-serif-title font-bold text-white">Owner Portal</h2>
+        <p class="text-xs text-slate-400">Enter passcode to access client schedule.</p>
+        <input type="password" id="owner-passcode-input" placeholder="Enter PIN (Default: 1234)" class="w-full bg-slate-950 border border-slate-700 rounded-lg p-3 text-sm text-center text-white tracking-widest focus:outline-none focus:border-pink-500">
+        <button onclick="unlockOwnerPortal()" class="w-full py-2.5 bg-pink-600 hover:bg-pink-500 text-white text-sm font-medium rounded-lg">Access Dashboard</button>
+      </div>
+
+      <!-- DASHBOARD CONTENT -->
+      <div id="owner-dashboard-content" class="hidden space-y-6">
+        <div class="flex items-center justify-between border-b border-slate-800 pb-4">
+          <div>
+            <h2 class="text-xl font-serif-title font-bold text-white">Studio Schedule & Bookings</h2>
+            <p class="text-xs text-slate-400">Private Owner Interface</p>
+          </div>
+          <div class="flex items-center gap-2">
+            <button onclick="changePasscode()" class="px-3 py-1.5 bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs rounded-lg">Change PIN</button>
+            <button onclick="lockOwnerPortal()" class="px-3 py-1.5 bg-rose-950 hover:bg-rose-900 text-rose-300 border border-rose-800/40 text-xs rounded-lg"><i class="fa-solid fa-lock mr-1"></i> Lock</button>
+          </div>
+        </div>
+
+        <div class="bg-slate-900 border border-slate-800 rounded-xl p-4 overflow-x-auto">
+          <table class="w-full text-left text-xs">
+            <thead>
+              <tr class="border-b border-slate-800 text-pink-300">
+                <th class="p-3">Client Name</th>
+                <th class="p-3">Phone</th>
+                <th class="p-3">Service</th>
+                <th class="p-3">Date & Time</th>
+                <th class="p-3">Action</th>
+              </tr>
+            </thead>
+            <tbody id="owner-bookings-table-body">
+              <!-- Bookings injected via JavaScript -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+    </section>
+
+  </main>
+
+  <footer class="text-center py-4 border-t border-slate-900 text-[11px] text-slate-600">
+    © The Eyebrow Fairy • Operating Hours: 5:00 PM – 7:30 PM
+  </footer>
+
+  <script>
+    // APP STATE
+    let currentStep = 1;
+    let selectedService = null;
+    let selectedDate = null;
+    let selectedTime = null;
+    let ownerPIN = localStorage.getItem('eyebrow_owner_pin') || '1234';
+
+    const SERVICES = [
+      { id: 1, name: "1. Shape & Wax", duration: "30 mins", method: "Wax", requiresPatchTest: false, desc: "Precision brow shaping tailored to your facial structure using gentle warm wax." },
+      { id: 2, name: "2. Shape & Shave", duration: "30 mins", method: "Shave", requiresPatchTest: false, desc: "Precision brow shaping tailored to your facial structure using a smooth soft-blade shaver." },
+      { id: 3, name: "3. Shape, Wax & Tint", duration: "45 mins", method: "Wax", requiresPatchTest: true, desc: "Brow shaping via warm wax combined with custom-blended tint for enhanced color and definition." },
+      { id: 4, name: "4. Shape, Shave & Tint", duration: "45 mins", method: "Shave", requiresPatchTest: true, desc: "Brow shaping via soft shaver combined with custom-blended tint for enhanced color and definition." },
+      { id: 5, name: "5. Shape, Wax & Lamination", duration: "45 mins", method: "Wax", requiresPatchTest: true, desc: "Lamination process to set brows in a full, feathery style with precision warm waxing." },
+      { id: 6, name: "6. Shape, Shave & Lamination", duration: "45 mins", method: "Shave", requiresPatchTest: true, desc: "Lamination process to set brows in a full, feathery style with precision soft-blade shaving." },
+      { id: 7, name: "7. Full Transformation (Wax)", duration: "1 hour", method: "Wax", requiresPatchTest: true, desc: "Ultimate brow makeover featuring lamination, custom tint, and precision warm waxing." },
+      { id: 8, name: "8. Full Transformation (Shave)", duration: "1 hour", method: "Shave", requiresPatchTest: true, desc: "Ultimate brow makeover featuring lamination, custom tint, and precision soft-blade shaving." }
+    ];
+
+    function init() {
+      renderServices();
+      // Set min date to today
+      const today = new Date().toISOString().split('T')[0];
+      document.getElementById('booking-date').min = today;
+    }
+
+    function renderServices() {
+      const container = document.getElementById('services-container');
+      container.innerHTML = SERVICES.map(s => `
+        <div onclick="selectService(${s.id})" class="cursor-pointer border rounded-xl p-4 transition bg-slate-900 border-slate-800 hover:border-pink-500 ${selectedService && selectedService.id === s.id ? 'border-pink-500 bg-pink-950/20' : ''}">
+          <div class="flex justify-between items-start mb-2">
+            <h4 class="font-semibold text-sm text-white">${s.name}</h4>
+            <span class="px-2 py-0.5 rounded text-[10px] font-semibold bg-slate-800 text-slate-300">${s.duration}</span>
+          </div>
+          <p class="text-xs text-slate-400 mb-3">${s.desc}</p>
+          <div class="flex items-center gap-2">
+            <span class="text-[10px] px-2 py-0.5 rounded ${s.method === 'Wax' ? 'bg-amber-950 text-amber-300 border border-amber-800/40' : 'bg-blue-950 text-blue-300 border border-blue-800/40'}">${s.method}</span>
+            ${s.requiresPatchTest ? '<span class="text-[10px] px-2 py-0.5 rounded bg-pink-950 text-pink-300 border border-pink-800/40">✨ 24h Patch Test Req.</span>' : ''}
+          </div>
+        </div>
+      `).join('');
+    }
+
+    function selectService(id) {
+      selectedService = SERVICES.find(s => s.id === id);
+      renderServices();
+      goToStep(2);
+    }
+
+    function goToStep(step) {
+      currentStep = step;
+      document.getElementById('step-1').classList.toggle('hidden', step !== 1);
+      document.getElementById('step-2').classList.toggle('hidden', step !== 2);
+      document.getElementById('step-3').classList.toggle('hidden', step !== 3);
+
+      if (step === 3 && selectedService.requiresPatchTest) {
+        document.getElementById('patch-test-checkbox-container').classList.remove('hidden');
+        document.getElementById('patch-test-agree').required = true;
+      } else {
+        document.getElementById('patch-test-checkbox-container').classList.add('hidden');
+        document.getElementById('patch-test-agree').required = false;
+      }
+    }
+
+    function renderTimeSlots() {
+      selectedDate = document.getElementById('booking-date').value;
+      if (!selectedDate) return;
+
+      const container = document.getElementById('time-slots');
+      const slots = ["5:00 PM", "5:30 PM", "6:00 PM", "6:30 PM", "7:00 PM"];
+      
+      container.innerHTML = slots.map(time => `
+        <button type="button" onclick="selectTime('${time}')" class="py-2 px-3 rounded-lg text-xs font-medium border text-center transition border-slate-700 bg-slate-950 text-slate-200 hover:border-pink-500 ${selectedTime === time ? 'bg-pink-600 text-white border-pink-600' : ''}">${time}</button>
+      `).join('');
+    }
+
+    function selectTime(time) {
+      selectedTime = time;
+      renderTimeSlots();
+      goToStep(3);
+    }
+
+    function formatPhone(input) {
+      let val = input.value.replace(/\D/g, '');
+      if (val.length > 3 && val.length <= 7) {
+        val = val.slice(0, 3) + '-' + val.slice(3);
+      }
+      input.value = val;
+    }
+
+    async function handleFormSubmit(e) {
+      e.preventDefault();
+      
+      const booking = {
+        id: Date.now(),
+        name: document.getElementById('client-name').value,
+        phone: document.getElementById('client-phone').value,
+        email: document.getElementById('client-email').value || 'N/A',
+        service: selectedService.name,
+        date: selectedDate,
+        time: selectedTime,
+        created: new Date().toISOString()
+      };
+
+      // 1. Save to Local Storage
+      const existing = JSON.parse(localStorage.getItem('eyebrow_bookings') || '[]');
+      existing.push(booking);
+      localStorage.setItem('eyebrow_bookings', JSON.stringify(existing));
+
+      // 2. Trigger Background Automated Notifications API
+      try {
+        fetch('/.netlify/functions/send-confirmation', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(booking)
+        });
+      } catch(err) {
+        console.log('Backend notify trigger dispatched.');
+      }
+
+      alert(`✨ Booking Confirmed!\n\nThank you ${booking.name}. Your appointment for ${booking.service} on ${booking.date} at ${booking.time} is successfully reserved!`);
+      
+      // Reset
+      selectedService = null;
+      selectedDate = null;
+      selectedTime = null;
+      document.getElementById('booking-form').reset();
+      renderServices();
+      goToStep(1);
+    }
+
+    function switchTab(tab) {
+      document.getElementById('view-booking').classList.toggle('hidden', tab !== 'booking');
+      document.getElementById('view-lookup').classList.toggle('hidden', tab !== 'lookup');
+      document.getElementById('view-owner').classList.toggle('hidden', tab !== 'owner');
+
+      document.getElementById('nav-booking').className = tab === 'booking' ? 'px-3 py-1.5 rounded-full text-xs font-medium transition bg-pink-600 text-white' : 'px-3 py-1.5 rounded-full text-xs font-medium transition text-slate-300 hover:text-white';
+      document.getElementById('nav-lookup').className = tab === 'lookup' ? 'px-3 py-1.5 rounded-full text-xs font-medium transition bg-pink-600 text-white' : 'px-3 py-1.5 rounded-full text-xs font-medium transition text-slate-300 hover:text-white';
+    }
+
+    function performLookup() {
+      const q = document.getElementById('lookup-query').value.trim().toLowerCase();
+      const container = document.getElementById('lookup-results');
+      if (!q) return;
+
+      const bookings = JSON.parse(localStorage.getItem('eyebrow_bookings') || '[]');
+      const matches = bookings.filter(b => b.phone.includes(q) || b.email.toLowerCase().includes(q));
+
+      if (matches.length === 0) {
+        container.innerHTML = `<p class="text-xs text-rose-400">No booking found for "${q}".</p>`;
+        return;
+      }
+
+      container.innerHTML = matches.map(b => `
+        <div class="bg-slate-950 border border-pink-900/40 rounded-xl p-4 text-left space-y-1">
+          <div class="flex justify-between items-center"><h4 class="font-bold text-sm text-pink-300">${b.service}</h4><span class="text-[10px] bg-pink-950 text-pink-300 px-2 py-0.5 rounded">Confirmed</span></div>
+          <p class="text-xs text-slate-300">📅 Date: ${b.date} at ${b.time}</p>
+          <p class="text-xs text-slate-400">👤 Client: ${b.name}</p>
+        </div>
+      `).join('');
+    }
+
+    function unlockOwnerPortal() {
+      const pin = document.getElementById('owner-passcode-input').value;
+      if (pin === ownerPIN) {
+        document.getElementById('owner-auth-modal').classList.add('hidden');
+        document.getElementById('owner-dashboard-content').classList.remove('hidden');
+        renderOwnerBookings();
+      } else {
+        alert('Incorrect PIN!');
+      }
+    }
+
+    function lockOwnerPortal() {
+      document.getElementById('owner-auth-modal').classList.remove('hidden');
+      document.getElementById('owner-dashboard-content').classList.add('hidden');
+      document.getElementById('owner-passcode-input').value = '';
+    }
+
+    function changePasscode() {
+      const newPin = prompt("Enter new 4-digit Owner PIN:");
+      if (newPin && newPin.length >= 4) {
+        ownerPIN = newPin;
+        localStorage.setItem('eyebrow_owner_pin', newPin);
+        alert("Passcode updated successfully!");
+      }
+    }
+
+    function renderOwnerBookings() {
+      const tbody = document.getElementById('owner-bookings-table-body');
+      const bookings = JSON.parse(localStorage.getItem('eyebrow_bookings') || '[]');
+
+      if (bookings.length === 0) {
+        tbody.innerHTML = `<tr><td colspan="5" class="p-4 text-center text-slate-500">No appointments scheduled yet.</td></tr>`;
+        return;
+      }
+
+      tbody.innerHTML = bookings.map(b => `
+        <tr class="border-b border-slate-800 hover:bg-slate-800/50">
+          <td class="p-3 font-medium text-white">${b.name}</td>
+          <td class="p-3 text-slate-300">+1 (868) ${b.phone}</td>
+          <td class="p-3 text-pink-300">${b.service}</td>
+          <td class="p-3 text-slate-300">${b.date} @ ${b.time}</td>
+          <td class="p-3"><button onclick="deleteBooking(${b.id})" class="text-rose-400 hover:underline">Cancel</button></td>
+        </tr>
+      `).join('');
+    }
+
+    function deleteBooking(id) {
+      if (confirm('Cancel this appointment?')) {
+        let bookings = JSON.parse(localStorage.getItem('eyebrow_bookings') || '[]');
+        bookings = bookings.filter(b => b.id !== id);
+        localStorage.setItem('eyebrow_bookings', JSON.stringify(bookings));
+        renderOwnerBookings();
+      }
+    }
+
+    // Initialize
+    init();
+  </script>
+</body>
+</html>
