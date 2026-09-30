@@ -212,14 +212,14 @@
     let ownerPIN = localStorage.getItem('eyebrow_owner_pin') || '1234';
 
     const SERVICES = [
-      { id: 1, name: "1. Shape & Wax - $60 tt", duration: "30 mins", method: "Wax", requiresPatchTest: false, desc: "Precision brow shaping tailored to your facial structure using gentle warm wax." },
-      { id: 2, name: "2. Shape & Shave - $60 tt", duration: "30 mins", method: "Shave", requiresPatchTest: false, desc: "Precision brow shaping tailored to your facial structure using a smooth soft-blade shaver." },
-      { id: 3, name: "3. Shape, Wax & Tint - $115 tt", duration: "45 mins", method: "Wax", requiresPatchTest: true, desc: "Brow shaping via warm wax combined with custom-blended tint for enhanced color and definition." },
-      { id: 4, name: "4. Shape, Shave & Tint - $115 tt", duration: "45 mins", method: "Shave", requiresPatchTest: true, desc: "Brow shaping via soft shaver combined with custom-blended tint for enhanced color and definition." },
-      { id: 5, name: "5. Shape, Wax & Lamination - $115 tt", duration: "45 mins", method: "Wax", requiresPatchTest: true, desc: "Lamination process to set brows in a full, feathery style with precision warm waxing and shaping." },
-      { id: 6, name: "6. Shape, Shave & Lamination - $115 tt", duration: "45 mins", method: "Shave", requiresPatchTest: true, desc: "Lamination process to set brows in a full, feathery style with precision soft-blade shaving and shaping." },
-      { id: 7, name: "7. Full Transformation (Wax) - $160 tt", duration: "1 hour", method: "Wax", requiresPatchTest: true, desc: "Ultimate brow makeover featuring brow shaping, lamination, custom tint, and precision warm waxing." },
-      { id: 8, name: "8. Full Transformation (Shave) - $160 tt", duration: "1 hour", method: "Shave", requiresPatchTest: true, desc: "Ultimate brow makeover featuring brow shaping, lamination, custom tint, and precision soft-blade shaving." }
+      { id: 1, name: "1. Shape & Wax ~ $60 ttd", duration: "30 mins", method: "Wax", requiresPatchTest: false, desc: "Precision brow shaping tailored to your facial structure using gentle warm wax." },
+      { id: 2, name: "2. Shape & Shave ~ $60 ttd", duration: "30 mins", method: "Shave", requiresPatchTest: false, desc: "Precision brow shaping tailored to your facial structure using a smooth soft-blade shaver." },
+      { id: 3, name: "3. Shape, Wax & Tint ~ $115 ttd", duration: "45 mins", method: "Wax", requiresPatchTest: true, desc: "Brow shaping via warm wax combined with custom-blended tint for enhanced color and definition." },
+      { id: 4, name: "4. Shape, Shave & Tint ~ $115 ttd", duration: "45 mins", method: "Shave", requiresPatchTest: true, desc: "Brow shaping via soft shaver combined with custom-blended tint for enhanced color and definition." },
+      { id: 5, name: "5. Shape, Wax & Lamination - $115 ttd", duration: "45 mins", method: "Wax", requiresPatchTest: true, desc: "Lamination process to set brows in a full, feathery style with precision warm waxing and shaping." },
+      { id: 6, name: "6. Shape, Shave & Lamination ~ $115 ttd", duration: "45 mins", method: "Shave", requiresPatchTest: true, desc: "Lamination process to set brows in a full, feathery style with precision soft-blade shaving and shaping." },
+      { id: 7, name: "7. Full Transformation (Wax) ~ $160 ttd", duration: "1 hour", method: "Wax", requiresPatchTest: true, desc: "Ultimate brow makeover featuring brow shaping, lamination, custom tint, and precision warm waxing." },
+      { id: 8, name: "8. Full Transformation (Shave) ~ $160 ttd", duration: "1 hour", method: "Shave", requiresPatchTest: true, desc: "Ultimate brow makeover featuring brow shaping, lamination, custom tint, and precision soft-blade shaving." }
     ];
 
     function init() {
@@ -293,61 +293,8 @@
       input.value = val;
     }
 
-    // ⚠️ REPLACE '7654321' WITH YOUR ACTUAL 7-DIGIT TRINIDAD WHATSAPP PHONE NUMBER
-const STUDIO_WHATSAPP_NUMBER = "18687654321"; 
-
-async function handleFormSubmit(e) {
-  e.preventDefault();
-  
-  const booking = {
-    id: Date.now(),
-    name: document.getElementById('client-name').value,
-    phone: document.getElementById('client-phone').value,
-    email: document.getElementById('client-email').value || 'N/A',
-    service: selectedService.name,
-    date: selectedDate,
-    time: selectedTime,
-    created: new Date().toISOString()
-  };
-
-  // 1. Save booking to local storage for the Owner Portal
-  const existing = JSON.parse(localStorage.getItem('eyebrow_bookings') || '[]');
-  existing.push(booking);
-  localStorage.setItem('eyebrow_bookings', JSON.stringify(existing));
-
-  // 2. Trigger background automated email via Resend (Free)
-  try {
-    fetch('/.netlify/functions/send-confirmation', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(booking)
-    });
-  } catch(err) {
-    console.log('Background email trigger dispatched.');
-  }
-
-  // 3. Format WhatsApp confirmation message
-  const waText = `✨ *New Booking - The Eyebrow Fairy* ✨%0A%0A` +
-                 `👤 *Client:* ${booking.name}%0A` +
-                 `📞 *Phone:* +1 (868) ${booking.phone}%0A` +
-                 `💅 *Service:* ${booking.service}%0A` +
-                 `📅 *Date:* ${booking.date}%0A` +
-                 `⏰ *Time:* ${booking.time}`;
-
-  // 4. Show confirmation alert & open WhatsApp automatically
-  alert(`✨ Booking Confirmed!\n\nThank you ${booking.name}. Tap OK to open WhatsApp and send your appointment confirmation to the studio.`);
-  
-  window.open(`https://wa.me/${STUDIO_WHATSAPP_NUMBER}?text=${waText}`, '_blank');
-
-  // 5. Reset form and return to step 1
-  selectedService = null;
-  selectedDate = null;
-  selectedTime = null;
-  document.getElementById('booking-form').reset();
-  renderServices();
-  goToStep(1);
-}
-
+    async function handleFormSubmit(e) {
+      e.preventDefault();
       
       const booking = {
         id: Date.now(),
