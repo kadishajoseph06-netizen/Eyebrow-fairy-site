@@ -4,7 +4,19 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>The Eyebrow Fairy - Precision Brow Studio</title>
+  
+  <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- Supabase JS Client CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  
+  <!-- EmailJS Browser SDK CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+
+  <!-- Font Awesome Icons CDN -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+
   <script>
     tailwind.config = {
       theme: {
@@ -13,27 +25,33 @@
             fairy: {
               50: '#fdf2f8', 100: '#fce7f3', 200: '#fbcfe8', 300: '#f472b6',
               400: '#e879f9', 500: '#d946ef', 600: '#c026d3', 700: '#a21caf',
-              800: '#86198f', 900: '#701a75'
+              800: '#86198f', 900: '#701a75', 950: '#4a044e'
             }
           }
         }
       }
     }
   </script>
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap');
     body { font-family: 'Plus Jakarta Sans', sans-serif; }
     .font-serif-title { font-family: 'Playfair Display', serif; }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(6px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .animate-fade-in { animation: fadeIn 0.3s ease-out forwards; }
   </style>
 </head>
-<body class="min-h-full bg-slate-950 text-slate-100 flex flex-col justify-between">
+<body class="min-h-full bg-slate-950 text-slate-100 flex flex-col justify-between selection:bg-pink-500 selection:text-white">
 
-  <!-- NAVIGATION HEADER -->
-  <header class="sticky top-0 z-40 bg-slate-900/90 backdrop-blur border-b border-pink-900/40 px-4 py-3">
+  <header class="sticky top-0 z-40 bg-slate-900/90 backdrop-blur border-b border-pink-900/30 px-4 py-3">
     <div class="max-w-4xl mx-auto flex items-center justify-between">
+      
+      <!-- BRAND LOGO -->
       <div class="flex items-center gap-3 cursor-pointer" onclick="switchTab('booking')">
-        <div class="w-10 h-10 rounded-full bg-pink-950 border border-pink-500/40 p-1 flex items-center justify-center">
+        <div class="w-10 h-10 rounded-full bg-pink-950/80 border border-pink-500/40 p-1.5 flex items-center justify-center shadow-lg shadow-pink-950/50">
           <svg viewBox="0 0 500 500" class="w-full h-full fill-pink-300">
             <path d="M250,150 C180,150 120,180 80,220 C140,190 200,180 250,180 C300,180 360,190 420,220 C380,180 320,150 250,150 Z"/>
             <path d="M120,300 C170,350 330,350 380,300 C340,320 280,330 250,330 C220,330 160,320 120,300 Z"/>
@@ -46,64 +64,75 @@
         </div>
       </div>
 
+      <!-- NAV BUTTONS -->
       <nav class="flex items-center gap-2">
-        <button onclick="switchTab('booking')" id="nav-booking" class="px-3 py-1.5 rounded-full text-xs font-medium transition bg-pink-600 text-white">Book Now</button>
-        <button onclick="switchTab('lookup')" id="nav-lookup" class="px-3 py-1.5 rounded-full text-xs font-medium transition text-slate-300 hover:text-white">My Booking</button>
-        <button onclick="switchTab('owner')" id="nav-owner" class="p-2 rounded-full text-xs font-medium text-slate-400 hover:text-pink-300"><i class="fa-solid fa-lock"></i></button>
+        <button onclick="switchTab('booking')" id="nav-booking" class="px-3.5 py-1.5 rounded-full text-xs font-semibold transition bg-pink-600 text-white shadow-md shadow-pink-600/30">Book Now</button>
+        <button onclick="switchTab('lookup')" id="nav-lookup" class="px-3.5 py-1.5 rounded-full text-xs font-semibold transition text-slate-300 hover:text-white hover:bg-slate-800">My Booking</button>
+        <button onclick="switchTab('owner')" id="nav-owner" title="Owner Portal" class="p-2 rounded-full text-xs font-medium text-slate-400 hover:text-pink-300 hover:bg-slate-800 transition"><i class="fa-solid fa-lock"></i></button>
       </nav>
+
     </div>
   </header>
 
-  <!-- MAIN CONTAINER -->
   <main class="max-w-4xl mx-auto w-full px-4 py-6 flex-grow">
 
+    <!-- ========================================== -->
     <!-- VIEW 1: BOOKING WIZARD -->
+    <!-- ========================================== -->
     <section id="view-booking" class="space-y-6">
       
       <!-- HERO BANNER -->
-      <div class="bg-gradient-to-r from-pink-950 via-slate-900 to-purple-950 border border-pink-900/30 rounded-2xl p-6 text-center shadow-xl">
-        <span class="inline-block px-3 py-1 bg-pink-500/10 border border-pink-500/20 text-pink-300 rounded-full text-xs font-semibold mb-3">✨ Reserve Your Eyebrow Session</span>
+      <div class="bg-gradient-to-r from-pink-950 via-slate-900 to-purple-950 border border-pink-900/30 rounded-2xl p-6 text-center shadow-xl relative overflow-hidden">
+        <div class="absolute -top-12 -right-12 w-32 h-32 bg-pink-500/10 rounded-full blur-2xl"></div>
+        <span class="inline-block px-3.5 py-1 bg-pink-500/10 border border-pink-500/20 text-pink-300 rounded-full text-xs font-semibold mb-3">✨ Precision Evening Brow Studio</span>
         <h2 class="text-2xl md:text-3xl font-serif-title font-bold text-white mb-2">Enhance Your Natural Beauty</h2>
-        <p class="text-xs text-slate-300 max-w-md mx-auto">Monday – Thursday Evening Appointments: 5:00 PM – 7:30 PM</p>
+        <p class="text-xs text-slate-300 max-w-md mx-auto leading-relaxed">Appointments Available Monday – Thursday Evenings: 5:00 PM – 7:30 PM</p>
       </div>
 
-      <!-- ON-PAGE SUCCESS NOTIFICATION -->
-      <div id="booking-success-card" class="hidden bg-emerald-950/80 border border-emerald-500/50 rounded-2xl p-6 text-center space-y-3 shadow-2xl animate-fade-in">
-        <div class="w-12 h-12 bg-emerald-900 text-emerald-300 rounded-full flex items-center justify-center mx-auto text-xl"><i class="fa-solid fa-check"></i></div>
+      <!-- SUCCESS CONFIRMATION CARD -->
+      <div id="booking-success-card" class="hidden bg-emerald-950/90 border border-emerald-500/50 rounded-2xl p-6 text-center space-y-3 shadow-2xl animate-fade-in">
+        <div class="w-12 h-12 bg-emerald-900 text-emerald-300 rounded-full flex items-center justify-center mx-auto text-xl shadow-inner"><i class="fa-solid fa-check"></i></div>
         <h3 class="text-xl font-serif-title font-bold text-white">Booking Confirmed!</h3>
         <p id="success-card-text" class="text-xs text-emerald-200 max-w-md mx-auto leading-relaxed"></p>
-        <button onclick="resetBookingFlow()" class="mt-2 px-5 py-2 bg-emerald-600 hover:bg-emerald-500 text-white font-medium rounded-lg text-xs transition">Book Another Appointment</button>
+        <div class="pt-2">
+          <button onclick="resetBookingFlow()" class="px-5 py-2.5 bg-emerald-600 hover:bg-emerald-500 text-white font-semibold rounded-lg text-xs transition shadow-lg">Book Another Appointment</button>
+        </div>
       </div>
 
-      <!-- BOOKING FORM WIZARD CONTAINER -->
-      <div id="booking-wizard-container">
+      <!-- BOOKING FORM WIZARD -->
+      <div id="booking-wizard-container" class="space-y-6">
         
         <!-- STEP 1: SERVICE SELECTION -->
         <div id="step-1" class="space-y-4">
-          <h3 class="text-base font-semibold text-pink-200 flex items-center gap-2"><span class="w-6 h-6 rounded-full bg-pink-900 text-pink-200 text-xs flex items-center justify-center font-bold">1</span> Choose a Service</h3>
-          
+          <h3 class="text-base font-semibold text-pink-200 flex items-center gap-2">
+            <span class="w-6 h-6 rounded-full bg-pink-900 border border-pink-700 text-pink-200 text-xs flex items-center justify-center font-bold">1</span>
+            Select a Brow Service
+          </h3>
           <div class="grid grid-cols-1 md:grid-cols-2 gap-4" id="services-container">
-            <!-- Services injected via JavaScript -->
+            <!-- Dynamic Services Rendered via JS -->
           </div>
         </div>
 
         <!-- STEP 2: DATE & TIME SELECTION -->
         <div id="step-2" class="hidden space-y-4">
           <div class="flex items-center justify-between">
-            <h3 class="text-base font-semibold text-pink-200 flex items-center gap-2"><span class="w-6 h-6 rounded-full bg-pink-900 text-pink-200 text-xs flex items-center justify-center font-bold">2</span> Select Date & Time</h3>
+            <h3 class="text-base font-semibold text-pink-200 flex items-center gap-2">
+              <span class="w-6 h-6 rounded-full bg-pink-900 border border-pink-700 text-pink-200 text-xs flex items-center justify-center font-bold">2</span>
+              Select Date & Time
+            </h3>
             <button onclick="goToStep(1)" class="text-xs text-pink-400 hover:underline">← Change Service</button>
           </div>
 
-          <div class="bg-slate-900 border border-slate-800 rounded-xl p-4 space-y-4">
+          <div class="bg-slate-900/80 border border-slate-800 rounded-xl p-5 space-y-5 shadow-lg">
             <div>
-              <label class="block text-xs font-medium text-slate-400 mb-2">Select Date (Monday to Thursday only)</label>
-              <input type="date" id="booking-date" onchange="renderTimeSlots()" class="w-full bg-slate-950 border border-slate-700 rounded-lg p-3 text-sm text-white focus:outline-none focus:border-pink-500">
+              <label class="block text-xs font-semibold text-slate-300 mb-2">Select Date (Monday to Thursday Only)</label>
+              <input type="date" id="booking-date" onchange="renderTimeSlots()" class="w-full bg-slate-950 border border-slate-700 rounded-lg p-3 text-sm text-white focus:outline-none focus:border-pink-500 transition">
             </div>
 
             <div>
-              <label class="block text-xs font-medium text-slate-400 mb-2">Available Evening Slots (5:00 PM – 7:30 PM)</label>
-              <div id="time-slots" class="grid grid-cols-3 sm:grid-cols-4 gap-2">
-                <p class="text-xs text-slate-500 col-span-full">Please pick a weekday first.</p>
+              <label class="block text-xs font-semibold text-slate-300 mb-2">Available Evening Time Slots</label>
+              <div id="time-slots" class="grid grid-cols-2 sm:grid-cols-3 gap-2.5">
+                <p class="text-xs text-slate-500 col-span-full py-2">Please pick a date above first.</p>
               </div>
             </div>
           </div>
@@ -112,37 +141,48 @@
         <!-- STEP 3: CLIENT DETAILS -->
         <div id="step-3" class="hidden space-y-4">
           <div class="flex items-center justify-between">
-            <h3 class="text-base font-semibold text-pink-200 flex items-center gap-2"><span class="w-6 h-6 rounded-full bg-pink-900 text-pink-200 text-xs flex items-center justify-center font-bold">3</span> Your Information</h3>
+            <h3 class="text-base font-semibold text-pink-200 flex items-center gap-2">
+              <span class="w-6 h-6 rounded-full bg-pink-900 border border-pink-700 text-pink-200 text-xs flex items-center justify-center font-bold">3</span>
+              Client Information
+            </h3>
             <button onclick="goToStep(2)" class="text-xs text-pink-400 hover:underline">← Change Time</button>
           </div>
 
-          <form id="booking-form" onsubmit="handleFormSubmit(event)" class="bg-slate-900 border border-slate-800 rounded-xl p-5 space-y-4">
+          <form id="booking-form" onsubmit="handleFormSubmit(event)" class="bg-slate-900/80 border border-slate-800 rounded-xl p-5 space-y-4 shadow-lg">
+            
+            <!-- SELECTED SUMMARY ITEM -->
+            <div id="selected-summary-box" class="bg-slate-950 border border-pink-900/40 rounded-lg p-3 text-xs space-y-1">
+              <div class="flex justify-between font-semibold text-pink-300"><span id="summary-service-name">-</span><span id="summary-price">-</span></div>
+              <p class="text-slate-400" id="summary-date-time">-</p>
+            </div>
+
             <div>
               <label class="block text-xs font-medium text-slate-300 mb-1">Full Name *</label>
-              <input type="text" id="client-name" required placeholder="Jane Doe" class="w-full bg-slate-950 border border-slate-700 rounded-lg p-3 text-sm text-white focus:outline-none focus:border-pink-500">
+              <input type="text" id="client-name" required placeholder="e.g. Sarah Ali" class="w-full bg-slate-950 border border-slate-700 rounded-lg p-3 text-sm text-white focus:outline-none focus:border-pink-500">
             </div>
 
             <div>
               <label class="block text-xs font-medium text-slate-300 mb-1">Trinidad Phone Number * (+1 868)</label>
               <div class="flex">
-                <span class="inline-flex items-center px-3 rounded-l-lg border border-r-0 border-slate-700 bg-slate-800 text-slate-400 text-sm">+1 (868)</span>
+                <span class="inline-flex items-center px-3 rounded-l-lg border border-r-0 border-slate-700 bg-slate-800 text-slate-400 text-xs font-mono">+1 (868)</span>
                 <input type="tel" id="client-phone" required maxlength="8" placeholder="765-4321" oninput="formatPhone(this)" class="w-full bg-slate-950 border border-slate-700 rounded-r-lg p-3 text-sm text-white focus:outline-none focus:border-pink-500">
               </div>
             </div>
 
             <div>
-              <label class="block text-xs font-medium text-slate-300 mb-1">Email Address <span class="text-slate-500">(Optional)</span></label>
-              <input type="email" id="client-email" placeholder="jane@example.com" class="w-full bg-slate-950 border border-slate-700 rounded-lg p-3 text-sm text-white focus:outline-none focus:border-pink-500">
+              <label class="block text-xs font-medium text-slate-300 mb-1">Email Address <span class="text-slate-500">(Optional for Confirmation)</span></label>
+              <input type="email" id="client-email" placeholder="sarah@example.com" class="w-full bg-slate-950 border border-slate-700 rounded-lg p-3 text-sm text-white focus:outline-none focus:border-pink-500">
             </div>
 
-            <div id="patch-test-checkbox-container" class="hidden bg-pink-950/40 border border-pink-800/40 rounded-lg p-3">
+            <!-- DYNAMIC PATCH TEST CHECKBOX -->
+            <div id="patch-test-checkbox-container" class="hidden bg-pink-950/40 border border-pink-800/40 rounded-lg p-3 space-y-1">
               <label class="flex items-start gap-2 cursor-pointer">
-                <input type="checkbox" id="patch-test-agree" class="mt-1 accent-pink-500">
+                <input type="checkbox" id="patch-test-agree" class="mt-0.5 accent-pink-500">
                 <span class="text-xs text-pink-200">I acknowledge that <strong>Lamination and Tint</strong> services require a 24-hour patch test prior to appointment time.</span>
               </label>
             </div>
 
-            <button type="submit" id="submit-btn" class="w-full py-3.5 bg-gradient-to-r from-pink-600 to-purple-600 hover:from-pink-500 hover:to-purple-500 text-white font-semibold rounded-lg text-sm shadow-lg transition">Confirm & Book Now</button>
+            <button type="submit" id="submit-btn" class="w-full py-3.5 bg-gradient-to-r from-pink-600 to-purple-600 hover:from-pink-500 hover:to-purple-500 text-white font-semibold rounded-lg text-sm shadow-lg shadow-pink-600/25 transition">Confirm & Book Now</button>
           </form>
         </div>
 
@@ -150,85 +190,88 @@
 
     </section>
 
+    <!-- ========================================== -->
     <!-- VIEW 2: CLIENT LOOKUP -->
+    <!-- ========================================== -->
     <section id="view-lookup" class="hidden space-y-6">
-      <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6 text-center max-w-md mx-auto space-y-4">
+      <div class="bg-slate-900/80 border border-slate-800 rounded-2xl p-6 text-center max-w-md mx-auto space-y-4 shadow-xl">
+        <div class="w-12 h-12 bg-pink-950/80 text-pink-300 rounded-full flex items-center justify-center mx-auto text-xl border border-pink-800/40"><i class="fa-solid fa-magnifying-glass"></i></div>
         <h2 class="text-xl font-serif-title font-bold text-white">Lookup Your Booking</h2>
-        <p class="text-xs text-slate-400">Enter your 7-digit Trinidad phone number or email to view your upcoming appointment.</p>
+        <p class="text-xs text-slate-400 leading-relaxed">Enter your Trinidad phone number (e.g. 7654321) or email to view appointment details.</p>
         
         <div class="space-y-3">
-          <input type="text" id="lookup-query" placeholder="Phone (e.g. 7654321) or Email" class="w-full bg-slate-950 border border-slate-700 rounded-lg p-3 text-sm text-white focus:outline-none focus:border-pink-500">
-          <button onclick="performLookup()" class="w-full py-3 bg-pink-600 hover:bg-pink-500 text-white font-medium rounded-lg text-sm">Find Appointment</button>
+          <input type="text" id="lookup-query" placeholder="Enter Phone or Email" class="w-full bg-slate-950 border border-slate-700 rounded-lg p-3 text-sm text-white text-center focus:outline-none focus:border-pink-500">
+          <button onclick="performLookup()" class="w-full py-3 bg-pink-600 hover:bg-pink-500 text-white font-semibold rounded-lg text-sm transition">Search Database</button>
         </div>
 
         <div id="lookup-results" class="pt-4 space-y-3"></div>
       </div>
     </section>
 
+    <!-- ========================================== -->
     <!-- VIEW 3: OWNER DASHBOARD -->
+    <!-- ========================================== -->
     <section id="view-owner" class="hidden space-y-6">
       
-      <!-- LOCK MODAL -->
-      <div id="owner-auth-modal" class="bg-slate-900 border border-slate-800 rounded-2xl p-6 max-w-sm mx-auto text-center space-y-4">
-        <div class="w-12 h-12 bg-pink-950 text-pink-400 rounded-full flex items-center justify-center mx-auto text-xl"><i class="fa-solid fa-lock"></i></div>
-        <h2 class="text-lg font-serif-title font-bold text-white">Owner Portal</h2>
-        <p class="text-xs text-slate-400">Enter passcode to access schedule & analytics.</p>
-        <input type="password" id="owner-passcode-input" placeholder="Enter PIN (Default: 1234)" class="w-full bg-slate-950 border border-slate-700 rounded-lg p-3 text-sm text-center text-white tracking-widest focus:outline-none focus:border-pink-500">
-        <button onclick="unlockOwnerPortal()" class="w-full py-2.5 bg-pink-600 hover:bg-pink-500 text-white text-sm font-medium rounded-lg">Access Dashboard</button>
+      <!-- AUTH PIN MODAL -->
+      <div id="owner-auth-modal" class="bg-slate-900 border border-slate-800 rounded-2xl p-6 max-w-sm mx-auto text-center space-y-4 shadow-2xl">
+        <div class="w-12 h-12 bg-pink-950 text-pink-400 rounded-full flex items-center justify-center mx-auto text-xl border border-pink-800/50"><i class="fa-solid fa-lock"></i></div>
+        <h2 class="text-lg font-serif-title font-bold text-white">Owner Access</h2>
+        <p class="text-xs text-slate-400">Enter passcode to view schedule & database.</p>
+        <input type="password" id="owner-passcode-input" placeholder="Default PIN: 1234" class="w-full bg-slate-950 border border-slate-700 rounded-lg p-3 text-sm text-center text-white tracking-widest focus:outline-none focus:border-pink-500">
+        <button onclick="unlockOwnerPortal()" class="w-full py-2.5 bg-pink-600 hover:bg-pink-500 text-white text-sm font-semibold rounded-lg transition">Access Dashboard</button>
       </div>
 
-      <!-- DASHBOARD CONTENT -->
+      <!-- DASHBOARD BODY -->
       <div id="owner-dashboard-content" class="hidden space-y-6">
-        
-        <!-- TOP HEADER & CONTROLS -->
         <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 border-b border-slate-800 pb-4">
           <div>
-            <h2 class="text-xl font-serif-title font-bold text-white">Studio Management & Schedule</h2>
-            <p class="text-xs text-slate-400">Private Owner Analytics</p>
+            <h2 class="text-xl font-serif-title font-bold text-white">Studio Management</h2>
+            <p class="text-xs text-slate-400 flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span> Cloud Sync Active (Supabase)</p>
           </div>
           <div class="flex items-center gap-2 flex-wrap">
-            <button onclick="exportToCSV()" class="px-3 py-1.5 bg-emerald-900/60 hover:bg-emerald-800 text-emerald-200 border border-emerald-700/50 text-xs rounded-lg flex items-center gap-1.5"><i class="fa-solid fa-file-excel"></i> Export Spreadsheet</button>
-            <button onclick="changePasscode()" class="px-3 py-1.5 bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs rounded-lg">Change PIN</button>
-            <button onclick="lockOwnerPortal()" class="px-3 py-1.5 bg-rose-950 hover:bg-rose-900 text-rose-300 border border-rose-800/40 text-xs rounded-lg"><i class="fa-solid fa-lock mr-1"></i> Lock</button>
+            <button onclick="exportToCSV()" class="px-3 py-1.5 bg-emerald-900/60 hover:bg-emerald-800 text-emerald-200 border border-emerald-700/50 text-xs rounded-lg flex items-center gap-1.5 transition"><i class="fa-solid fa-file-excel"></i> Export CSV</button>
+            <button onclick="changePasscode()" class="px-3 py-1.5 bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs rounded-lg transition">Change PIN</button>
+            <button onclick="lockOwnerPortal()" class="px-3 py-1.5 bg-rose-950 hover:bg-rose-900 text-rose-300 border border-rose-800/40 text-xs rounded-lg transition"><i class="fa-solid fa-lock mr-1"></i> Lock</button>
           </div>
         </div>
 
         <!-- ANALYTICS CARDS -->
         <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
           <div class="bg-slate-900 border border-slate-800 rounded-xl p-4">
-            <p class="text-[10px] uppercase font-semibold text-slate-400">Total Bookings</p>
+            <p class="text-[10px] uppercase font-bold text-slate-400">Total Bookings</p>
             <p id="stat-total-count" class="text-2xl font-bold text-white mt-1">0</p>
           </div>
           <div class="bg-slate-900 border border-slate-800 rounded-xl p-4">
-            <p class="text-[10px] uppercase font-semibold text-slate-400">Expected Total</p>
+            <p class="text-[10px] uppercase font-bold text-slate-400">Expected Value</p>
             <p id="stat-total-revenue" class="text-2xl font-bold text-pink-400 mt-1">$0 TTD</p>
           </div>
           <div class="bg-slate-900 border border-slate-800 rounded-xl p-4">
-            <p class="text-[10px] uppercase font-semibold text-slate-400">Active Upcoming</p>
+            <p class="text-[10px] uppercase font-bold text-slate-400">Upcoming</p>
             <p id="stat-upcoming-count" class="text-2xl font-bold text-emerald-400 mt-1">0</p>
           </div>
           <div class="bg-slate-900 border border-slate-800 rounded-xl p-4">
-            <p class="text-[10px] uppercase font-semibold text-slate-400">Completed</p>
+            <p class="text-[10px] uppercase font-bold text-slate-400">Completed</p>
             <p id="stat-completed-count" class="text-2xl font-bold text-blue-400 mt-1">0</p>
           </div>
         </div>
 
-        <!-- BOOKINGS TABLE -->
-        <div class="bg-slate-900 border border-slate-800 rounded-xl p-4 overflow-x-auto">
+        <!-- BOOKINGS DATA TABLE -->
+        <div class="bg-slate-900 border border-slate-800 rounded-xl p-4 overflow-x-auto shadow-xl">
           <table class="w-full text-left text-xs">
             <thead>
-              <tr class="border-b border-slate-800 text-pink-300">
+              <tr class="border-b border-slate-800 text-pink-300 font-semibold">
                 <th class="p-3">Client Name</th>
                 <th class="p-3">Phone</th>
                 <th class="p-3">Service</th>
                 <th class="p-3">Date & Time</th>
-                <th class="p-3">Est. Value</th>
+                <th class="p-3">Price</th>
                 <th class="p-3">Status</th>
                 <th class="p-3">Action</th>
               </tr>
             </thead>
             <tbody id="owner-bookings-table-body">
-              <!-- Bookings injected via JavaScript -->
+              <tr><td colspan="7" class="p-4 text-center text-slate-500">Loading live bookings...</td></tr>
             </tbody>
           </table>
         </div>
@@ -239,26 +282,43 @@
   </main>
 
   <footer class="text-center py-4 border-t border-slate-900 text-[11px] text-slate-600">
-    © The Eyebrow Fairy • Operating Hours: Mon – Thur, 5:00 PM – 7:30 PM
+    © The Eyebrow Fairy • Operating Hours: Mon – Thu, 5:00 PM – 7:30 PM
   </footer>
 
   <script>
-    // APP STATE
+    // ==========================================
+    // INTEGRATED CREDENTIALS
+    // ==========================================
+    const SUPABASE_URL = "https://lryhkynrkjazzdpfhhlk.supabase.co";
+    const SUPABASE_KEY = "sb_publishable_597-6m8PlOqK854EBadc3g_W-USoPLd";
+    
+    const EMAILJS_PUBLIC_KEY = "RN9tX85mJ72-HlTON";
+    const EMAILJS_SERVICE_ID = "service_0yplms8";
+    const EMAILJS_TEMPLATE_ID = "template_qfxyghk";
+
+    // Initialize Supabase Client
+    const db = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+
+    // Initialize EmailJS Browser SDK
+    emailjs.init(EMAILJS_PUBLIC_KEY);
+
+    // STATE VARIABLES
     let currentStep = 1;
     let selectedService = null;
     let selectedDate = null;
     let selectedTime = null;
     let ownerPIN = localStorage.getItem('eyebrow_owner_pin') || '1234';
 
+    // 8 DETAILED BROW SERVICES
     const SERVICES = [
-      { id: 1, name: "1. Shape & Wax ~ $60ttd", duration: "30 mins", method: "Wax", requiresPatchTest: false, estimatedPrice: 60, desc: "Precision brow shaping tailored to your facial structure using mapping tecnique and waxing." },
-      { id: 2, name: "2. Shape & Shave ~ $60ttd", duration: "30 mins", method: "Shave", requiresPatchTest: false, estimatedPrice: 60, desc: "Precision brow shaping tailored to your facial structure using mapping technique and a smooth gentle-blade shaver." },
-      { id: 3, name: "3. Shape, Wax & Tint ~ $115ttd", duration: "45 mins", method: "Wax", requiresPatchTest: true, estimatedPrice: 115, desc: "Brow mapping and shaping including brow waxing with custom-blended tint for enhanced color and definition." },
-      { id: 4, name: "4. Shape, Shave & Tint ~ $115ttd", duration: "45 mins", method: "Shave", requiresPatchTest: true, estimatedPrice: 115, desc: "Brow mapping and shaping including a gentle brow shaving with custom-blended tint for enhanced color and definition." },
-      { id: 5, name: "5. Shape, Wax & Lamination ~ $115ttd", duration: "45 mins", method: "Wax", requiresPatchTest: true, estimatedPrice: 115, desc: "Lamination process to set brows in a full, feathery style with precision waxing and shaping." },
-      { id: 6, name: "6. Shape, Shave & Lamination~ $115ttd", duration: "45 mins", method: "Shave", requiresPatchTest: true, estimatedPrice: 115, desc: "Lamination process to set brows in a full, feathery style with precision blade shaving and shaping." },
-      { id: 7, name: "7. Full Transformation (Wax)~ $160ttd", duration: "1 hour", method: "Wax", requiresPatchTest: true, estimatedPrice: 160, desc: "Ultimate brow makeover featuring brow shaping, lamination, custom tint, and precision waxing." },
-      { id: 8, name: "8. Full Transformation (Shave)~ $160ttd", duration: "1 hour", method: "Shave", requiresPatchTest: true, estimatedPrice: 160, desc: "Ultimate brow makeover featuring brow shaping, lamination, custom tint, and precision blade shaving." }
+      { id: 1, name: "1. Shape & Wax", duration: "30 mins", method: "Wax", requiresPatchTest: false, estimatedPrice: 80, desc: "Precision brow shaping tailored to your facial structure using gentle warm wax." },
+      { id: 2, name: "2. Shape & Shave", duration: "30 mins", method: "Shave", requiresPatchTest: false, estimatedPrice: 70, desc: "Precision brow shaping tailored to your facial structure using a smooth soft-blade shaver." },
+      { id: 3, name: "3. Shape, Wax & Tint", duration: "45 mins", method: "Wax", requiresPatchTest: true, estimatedPrice: 130, desc: "Brow shaping via warm wax combined with custom-blended tint for enhanced color and definition." },
+      { id: 4, name: "4. Shape, Shave & Tint", duration: "45 mins", method: "Shave", requiresPatchTest: true, estimatedPrice: 120, desc: "Brow shaping via soft shaver combined with custom-blended tint for enhanced color and definition." },
+      { id: 5, name: "5. Shape, Wax & Lamination", duration: "45 mins", method: "Wax", requiresPatchTest: true, estimatedPrice: 180, desc: "Lamination process to set brows in a full, feathery style with precision warm waxing." },
+      { id: 6, name: "6. Shape, Shave & Lamination", duration: "45 mins", method: "Shave", requiresPatchTest: true, estimatedPrice: 170, desc: "Lamination process to set brows in a full, feathery style with precision soft-blade shaving." },
+      { id: 7, name: "7. Full Transformation (Wax)", duration: "1 hour", method: "Wax", requiresPatchTest: true, estimatedPrice: 230, desc: "Ultimate brow makeover featuring lamination, custom tint, and precision warm waxing." },
+      { id: 8, name: "8. Full Transformation (Shave)", duration: "1 hour", method: "Shave", requiresPatchTest: true, estimatedPrice: 220, desc: "Ultimate brow makeover featuring lamination, custom tint, and precision soft-blade shaving." }
     ];
 
     function init() {
@@ -270,15 +330,15 @@
     function renderServices() {
       const container = document.getElementById('services-container');
       container.innerHTML = SERVICES.map(s => `
-        <div onclick="selectService(${s.id})" class="cursor-pointer border rounded-xl p-4 transition bg-slate-900 border-slate-800 hover:border-pink-500 ${selectedService && selectedService.id === s.id ? 'border-pink-500 bg-pink-950/20' : ''}">
+        <div onclick="selectService(${s.id})" class="cursor-pointer border rounded-xl p-4 transition bg-slate-900/90 border-slate-800 hover:border-pink-500/80 hover:bg-slate-900 ${selectedService && selectedService.id === s.id ? 'border-pink-500 bg-pink-950/30' : ''}">
           <div class="flex justify-between items-start mb-2">
             <h4 class="font-semibold text-sm text-white">${s.name}</h4>
-            <span class="px-2 py-0.5 rounded text-[10px] font-semibold bg-slate-800 text-slate-300">${s.duration}</span>
+            <span class="px-2 py-0.5 rounded text-[10px] font-semibold bg-slate-800 text-slate-300">$${s.estimatedPrice} TTD</span>
           </div>
-          <p class="text-xs text-slate-400 mb-3">${s.desc}</p>
+          <p class="text-xs text-slate-400 mb-3 leading-relaxed">${s.desc}</p>
           <div class="flex items-center gap-2">
-            <span class="text-[10px] px-2 py-0.5 rounded ${s.method === 'Wax' ? 'bg-amber-950 text-amber-300 border border-amber-800/40' : 'bg-blue-950 text-blue-300 border border-blue-800/40'}">${s.method}</span>
-            ${s.requiresPatchTest ? '<span class="text-[10px] px-2 py-0.5 rounded bg-pink-950 text-pink-300 border border-pink-800/40">✨ 24h Patch Test Req.</span>' : ''}
+            <span class="text-[10px] px-2 py-0.5 rounded ${s.method === 'Wax' ? 'bg-amber-950 text-amber-300 border border-amber-800/40' : 'bg-blue-950 text-blue-300 border border-blue-800/40'}">${s.method} • ${s.duration}</span>
+            ${s.requiresPatchTest ? '<span class="text-[10px] px-2 py-0.5 rounded bg-pink-950 text-pink-300 border border-pink-800/40">✨ 24h Patch Test</span>' : ''}
           </div>
         </div>
       `).join('');
@@ -296,12 +356,18 @@
       document.getElementById('step-2').classList.toggle('hidden', step !== 2);
       document.getElementById('step-3').classList.toggle('hidden', step !== 3);
 
-      if (step === 3 && selectedService.requiresPatchTest) {
-        document.getElementById('patch-test-checkbox-container').classList.remove('hidden');
-        document.getElementById('patch-test-agree').required = true;
-      } else {
-        document.getElementById('patch-test-checkbox-container').classList.add('hidden');
-        document.getElementById('patch-test-agree').required = false;
+      if (step === 3) {
+        document.getElementById('summary-service-name').textContent = selectedService.name;
+        document.getElementById('summary-price').textContent = `$${selectedService.estimatedPrice} TTD`;
+        document.getElementById('summary-date-time').textContent = `📅 ${selectedDate} at ${selectedTime}`;
+
+        if (selectedService.requiresPatchTest) {
+          document.getElementById('patch-test-checkbox-container').classList.remove('hidden');
+          document.getElementById('patch-test-agree').required = true;
+        } else {
+          document.getElementById('patch-test-checkbox-container').classList.add('hidden');
+          document.getElementById('patch-test-agree').required = false;
+        }
       }
     }
 
@@ -310,23 +376,20 @@
       selectedDate = dateInput.value;
       if (!selectedDate) return;
 
-      // Check if selected date is a Friday (5), Saturday (6), or Sunday (0)
       const dateObj = new Date(selectedDate + 'T00:00:00');
       const dayOfWeek = dateObj.getDay();
 
-      if (dayOfWeek === 0|| dayOfWeek === 5 || dayOfWeek === 6) {
-        alert("Appointments are available Monday to Thursday only. Please select a valid date.");
+      if (dayOfWeek === 0 || dayOfWeek === 5 || dayOfWeek === 6) {
+        alert("Appointments are available Monday to Thursday only.");
         dateInput.value = '';
         selectedDate = null;
-        document.getElementById('time-slots').innerHTML = `<p class="text-xs text-rose-400 col-span-full">Weekend selected. Please choose a Monday–Thursday date.</p>`;
+        document.getElementById('time-slots').innerHTML = `<p class="text-xs text-rose-400 col-span-full">Please pick a Monday–Thursday date.</p>`;
         return;
       }
 
-      const container = document.getElementById('time-slots');
-      const slots = ["5:00 PM", "5:30 PM", "6:00 PM", "6:30 PM", "7:00 PM"];
-      
-      container.innerHTML = slots.map(time => `
-        <button type="button" onclick="selectTime('${time}')" class="py-2 px-3 rounded-lg text-xs font-medium border text-center transition border-slate-700 bg-slate-950 text-slate-200 hover:border-pink-500 ${selectedTime === time ? 'bg-pink-600 text-white border-pink-600' : ''}">${time}</button>
+      const slots = ["5:00 PM", "5:30 PM", "6:00 PM", "6:30 PM", "7:00 PM", "7:30 PM"];
+      document.getElementById('time-slots').innerHTML = slots.map(time => `
+        <button type="button" onclick="selectTime('${time}')" class="py-2.5 px-3 rounded-lg text-xs font-semibold border text-center transition border-slate-700 bg-slate-950 text-slate-200 hover:border-pink-500 ${selectedTime === time ? 'bg-pink-600 text-white border-pink-600 shadow-md shadow-pink-600/30' : ''}">${time}</button>
       `).join('');
     }
 
@@ -338,51 +401,55 @@
 
     function formatPhone(input) {
       let val = input.value.replace(/\D/g, '');
-      if (val.length > 3 && val.length <= 7) {
-        val = val.slice(0, 3) + '-' + val.slice(3);
-      }
+      if (val.length > 3 && val.length <= 7) val = val.slice(0, 3) + '-' + val.slice(3);
       input.value = val;
     }
 
     async function handleFormSubmit(e) {
       e.preventDefault();
-      
-      const booking = {
-        id: Date.now(),
+      const submitBtn = document.getElementById('submit-btn');
+      submitBtn.disabled = true;
+      submitBtn.innerText = "Syncing & Confirming...";
+
+      const bookingData = {
         name: document.getElementById('client-name').value,
         phone: document.getElementById('client-phone').value,
         email: document.getElementById('client-email').value || 'N/A',
         service: selectedService.name,
-        estimatedPrice: selectedService.estimatedPrice,
+        estimated_price: selectedService.estimatedPrice,
         date: selectedDate,
         time: selectedTime,
-        status: 'Upcoming',
-        created: new Date().toISOString()
+        status: 'Upcoming'
       };
 
-      // 1. Save to Local Storage
-      const existing = JSON.parse(localStorage.getItem('eyebrow_bookings') || '[]');
-      existing.push(booking);
-      localStorage.setItem('eyebrow_bookings', JSON.stringify(existing));
-
-      // 2. Trigger Background Automated Email via Resend
       try {
-        fetch('/.netlify/functions/send-confirmation', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(booking)
+        // 1. SAVE TO SUPABASE CLOUD DATABASE
+        const { error } = await db.from('bookings').insert([bookingData]);
+        if (error) console.error("Supabase Error:", error);
+
+        // 2. DISPATCH INSTANT EMAIL NOTIFICATION
+        await emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, {
+          client_name: bookingData.name,
+          client_phone: "+1 (868) " + bookingData.phone,
+          client_email: bookingData.email,
+          service_name: bookingData.service,
+          booking_date: bookingData.date,
+          booking_time: bookingData.time,
+          estimated_price: bookingData.estimated_price
         });
-      } catch(err) {
-        console.log('Background email notification dispatched.');
+
+      } catch (err) {
+        console.warn("Notice during background sync:", err);
       }
 
-      // 3. Display On-Page Confirmation Notification
+      // 3. SHOW CONFIRMATION CARD
       document.getElementById('booking-wizard-container').classList.add('hidden');
       document.getElementById('success-card-text').innerHTML = `
-        Thank you, <strong>${booking.name}</strong>! Your appointment for <strong>${booking.service}</strong> on <strong>${booking.date}</strong> at <strong>${booking.time}</strong> is officially scheduled.
-        ${booking.email !== 'N/A' ? '<br><span class="text-[11px] text-emerald-300">A confirmation email has also been sent to ' + booking.email + '.</span>' : ''}
+        Thank you, <strong>${bookingData.name}</strong>! Your appointment for <strong>${bookingData.service}</strong> on <strong>${bookingData.date}</strong> at <strong>${bookingData.time}</strong> is officially confirmed.
       `;
       document.getElementById('booking-success-card').classList.remove('hidden');
+      submitBtn.disabled = false;
+      submitBtn.innerText = "Confirm & Book Now";
     }
 
     function resetBookingFlow() {
@@ -401,26 +468,33 @@
       document.getElementById('view-lookup').classList.toggle('hidden', tab !== 'lookup');
       document.getElementById('view-owner').classList.toggle('hidden', tab !== 'owner');
 
-      document.getElementById('nav-booking').className = tab === 'booking' ? 'px-3 py-1.5 rounded-full text-xs font-medium transition bg-pink-600 text-white' : 'px-3 py-1.5 rounded-full text-xs font-medium transition text-slate-300 hover:text-white';
-      document.getElementById('nav-lookup').className = tab === 'lookup' ? 'px-3 py-1.5 rounded-full text-xs font-medium transition bg-pink-600 text-white' : 'px-3 py-1.5 rounded-full text-xs font-medium transition text-slate-300 hover:text-white';
+      document.getElementById('nav-booking').className = tab === 'booking' ? 'px-3.5 py-1.5 rounded-full text-xs font-semibold transition bg-pink-600 text-white shadow-md shadow-pink-600/30' : 'px-3.5 py-1.5 rounded-full text-xs font-semibold transition text-slate-300 hover:text-white hover:bg-slate-800';
+      document.getElementById('nav-lookup').className = tab === 'lookup' ? 'px-3.5 py-1.5 rounded-full text-xs font-semibold transition bg-pink-600 text-white shadow-md shadow-pink-600/30' : 'px-3.5 py-1.5 rounded-full text-xs font-semibold transition text-slate-300 hover:text-white hover:bg-slate-800';
     }
 
-    function performLookup() {
+    async function performLookup() {
       const q = document.getElementById('lookup-query').value.trim().toLowerCase();
       const container = document.getElementById('lookup-results');
       if (!q) return;
 
-      const bookings = JSON.parse(localStorage.getItem('eyebrow_bookings') || '[]');
-      const matches = bookings.filter(b => b.phone.includes(q) || (b.email && b.email.toLowerCase().includes(q)));
+      container.innerHTML = `<p class="text-xs text-slate-400">Searching database...</p>`;
+
+      const { data, error } = await db.from('bookings').select('*');
+      if (error || !data) {
+        container.innerHTML = `<p class="text-xs text-rose-400">Could not connect to database.</p>`;
+        return;
+      }
+
+      const matches = data.filter(b => b.phone.includes(q) || (b.email && b.email.toLowerCase().includes(q)));
 
       if (matches.length === 0) {
-        container.innerHTML = `<p class="text-xs text-rose-400">No booking found for "${q}".</p>`;
+        container.innerHTML = `<p class="text-xs text-rose-400">No booking found matching "${q}".</p>`;
         return;
       }
 
       container.innerHTML = matches.map(b => `
-        <div class="bg-slate-950 border border-pink-900/40 rounded-xl p-4 text-left space-y-1">
-          <div class="flex justify-between items-center"><h4 class="font-bold text-sm text-pink-300">${b.service}</h4><span class="text-[10px] bg-pink-950 text-pink-300 px-2 py-0.5 rounded">${b.status || 'Confirmed'}</span></div>
+        <div class="bg-slate-950 border border-pink-900/40 rounded-xl p-4 text-left space-y-1 animate-fade-in">
+          <div class="flex justify-between items-center"><h4 class="font-bold text-sm text-pink-300">${b.service}</h4><span class="text-[10px] bg-pink-950 text-pink-300 px-2 py-0.5 rounded border border-pink-800/40">${b.status || 'Confirmed'}</span></div>
           <p class="text-xs text-slate-300">📅 Date: ${b.date} at ${b.time}</p>
           <p class="text-xs text-slate-400">👤 Client: ${b.name}</p>
         </div>
@@ -445,20 +519,27 @@
     }
 
     function changePasscode() {
-      const newPin = prompt("Enter new 4-digit Owner PIN:");
+      const newPin = prompt("Enter new Owner PIN (minimum 4 digits):");
       if (newPin && newPin.length >= 4) {
         ownerPIN = newPin;
         localStorage.setItem('eyebrow_owner_pin', newPin);
-        alert("Passcode updated successfully!");
+        alert("PIN updated successfully!");
       }
     }
 
-    function renderOwnerDashboard() {
-      const bookings = JSON.parse(localStorage.getItem('eyebrow_bookings') || '[]');
+    async function renderOwnerDashboard() {
+      const tbody = document.getElementById('owner-bookings-table-body');
+      tbody.innerHTML = `<tr><td colspan="7" class="p-4 text-center text-slate-500">Loading live bookings from Supabase...</td></tr>`;
 
-      // Calculate Stats
+      const { data: bookings, error } = await db.from('bookings').select('*').order('id', { ascending: false });
+
+      if (error || !bookings) {
+        tbody.innerHTML = `<tr><td colspan="7" class="p-4 text-center text-rose-400">Failed to load bookings from Supabase.</td></tr>`;
+        return;
+      }
+
       const totalCount = bookings.length;
-      const totalRevenue = bookings.reduce((sum, b) => sum + (b.estimatedPrice || 0), 0);
+      const totalRevenue = bookings.reduce((sum, b) => sum + (Number(b.estimated_price) || 0), 0);
       const upcomingCount = bookings.filter(b => (b.status || 'Upcoming') === 'Upcoming').length;
       const completedCount = bookings.filter(b => b.status === 'Completed').length;
 
@@ -467,58 +548,50 @@
       document.getElementById('stat-upcoming-count').textContent = upcomingCount;
       document.getElementById('stat-completed-count').textContent = completedCount;
 
-      const tbody = document.getElementById('owner-bookings-table-body');
       if (bookings.length === 0) {
-        tbody.innerHTML = `<tr><td colspan="7" class="p-4 text-center text-slate-500">No appointments scheduled yet.</td></tr>`;
+        tbody.innerHTML = `<tr><td colspan="7" class="p-4 text-center text-slate-500">No appointments recorded yet.</td></tr>`;
         return;
       }
 
       tbody.innerHTML = bookings.map(b => `
-        <tr class="border-b border-slate-800 hover:bg-slate-800/50">
-          <td class="p-3 font-medium text-white">${b.name}</td>
-          <td class="p-3 text-slate-300">+1 (868) ${b.phone}</td>
+        <tr class="border-b border-slate-800 hover:bg-slate-800/50 transition">
+          <td class="p-3 font-semibold text-white">${b.name}</td>
+          <td class="p-3 text-slate-300 font-mono">+1 (868) ${b.phone}</td>
           <td class="p-3 text-pink-300">${b.service}</td>
           <td class="p-3 text-slate-300">${b.date} @ ${b.time}</td>
-          <td class="p-3 text-emerald-400 font-semibold">$${b.estimatedPrice || 0} TTD</td>
+          <td class="p-3 text-emerald-400 font-semibold">$${b.estimated_price || 0} TTD</td>
           <td class="p-3">
-            <select onchange="updateBookingStatus(${b.id}, this.value)" class="bg-slate-950 border border-slate-700 rounded px-2 py-1 text-[11px] text-slate-200 focus:outline-none">
+            <select onchange="updateBookingStatus('${b.id}', this.value)" class="bg-slate-950 border border-slate-700 rounded px-2 py-1 text-[11px] text-slate-200 focus:outline-none focus:border-pink-500">
               <option value="Upcoming" ${(!b.status || b.status === 'Upcoming') ? 'selected' : ''}>Upcoming</option>
               <option value="Completed" ${b.status === 'Completed' ? 'selected' : ''}>Completed</option>
               <option value="Canceled" ${b.status === 'Canceled' ? 'selected' : ''}>Canceled</option>
             </select>
           </td>
-          <td class="p-3"><button onclick="deleteBooking(${b.id})" class="text-rose-400 hover:underline">Delete</button></td>
+          <td class="p-3"><button onclick="deleteBooking('${b.id}')" class="text-rose-400 hover:underline">Delete</button></td>
         </tr>
       `).join('');
     }
 
-    function updateBookingStatus(id, newStatus) {
-      let bookings = JSON.parse(localStorage.getItem('eyebrow_bookings') || '[]');
-      const b = bookings.find(item => item.id === id);
-      if (b) {
-        b.status = newStatus;
-        localStorage.setItem('eyebrow_bookings', JSON.stringify(bookings));
+    async function updateBookingStatus(id, newStatus) {
+      await db.from('bookings').update({ status: newStatus }).eq('id', id);
+      renderOwnerDashboard();
+    }
+
+    async function deleteBooking(id) {
+      if (confirm('Delete this appointment record permanently?')) {
+        await db.from('bookings').delete().eq('id', id);
         renderOwnerDashboard();
       }
     }
 
-    function deleteBooking(id) {
-      if (confirm('Delete this appointment entry?')) {
-        let bookings = JSON.parse(localStorage.getItem('eyebrow_bookings') || '[]');
-        bookings = bookings.filter(b => b.id !== id);
-        localStorage.setItem('eyebrow_bookings', JSON.stringify(bookings));
-        renderOwnerDashboard();
-      }
-    }
-
-    function exportToCSV() {
-      const bookings = JSON.parse(localStorage.getItem('eyebrow_bookings') || '[]');
-      if (bookings.length === 0) {
+    async function exportToCSV() {
+      const { data: bookings } = await db.from('bookings').select('*');
+      if (!bookings || bookings.length === 0) {
         alert('No bookings available to export.');
         return;
       }
 
-      let csvContent = "data:text/csv;charset=utf-8,ID,Client Name,Trinidad Phone,Email,Service,Date,Time,Est Price (TTD),Status,Created Date\n";
+      let csvContent = "data:text/csv;charset=utf-8,ID,Client Name,Trinidad Phone,Email,Service,Date,Time,Est Price (TTD),Status\n";
 
       bookings.forEach(b => {
         const row = [
@@ -529,9 +602,8 @@
           `"${b.service}"`,
           `"${b.date}"`,
           `"${b.time}"`,
-          `"${b.estimatedPrice || 0}"`,
-          `"${b.status || 'Upcoming'}"`,
-          `"${b.created}"`
+          `"${b.estimated_price || 0}"`,
+          `"${b.status || 'Upcoming'}"`
         ].join(",");
         csvContent += row + "\n";
       });
@@ -545,8 +617,9 @@
       document.body.removeChild(link);
     }
 
-    // Initialize
+    // Run initialization
     init();
   </script>
 </body>
 </html>
+```
